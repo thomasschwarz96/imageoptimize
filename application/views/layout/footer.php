@@ -11,13 +11,13 @@
 
       <div class="col-4 text-center">
         <span class="text-muted">
-          Bilder optimiert: <strong>STATS</strong>
+          Images optimized: <strong><?php echo $optimizedImages; ?></strong>
         </span>
       </div>
 
       <div class="col-4 text-center">
         <span class="text-muted">
-          Speicher optimiert: <strong>STATS GB</strong>
+          Size optimized: <strong><?php echo $optimizedSize; ?> GB</strong>
         </span>
       </div>
 

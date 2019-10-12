@@ -19,15 +19,15 @@ class IO_Base extends CI_Controller
   /**
 	 * Classname
 	 *
-	 * @var	string
+	 * @var  string
 	 */
 	public $className;
 
 
   /**
-	 * Class constructor
+	 * Class constructor.
 	 *
-	 * @return	void
+	 * @return void
 	 */
 	public function __construct()
 	{

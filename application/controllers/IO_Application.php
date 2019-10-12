@@ -17,6 +17,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class IO_Application extends IO_Base
 {
 	/**
+	 * Statistic controller.
+	 *
+	 * @var IO_Statistics
+	 */
+	public $stats;
+
+	/**
+	 * Class constructor.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+    parent::__construct();
+
+		$this->stats = new IO_Statistics();
+  }
+
+
+	/**
 	 * Index Page for this controller.
 	 *
 	 * Maps to the following URL
@@ -33,6 +53,11 @@ class IO_Application extends IO_Base
 	 */
 	public function index()
 	{
-		$this->load->view('application');
+		$viewData = [
+			'optimizedImages' => $this->stats->optimizedImages,
+			'optimizedSize' => $this->stats->optimizedSize
+		];
+
+		$this->load->view('application', $viewData);
 	}
 }
