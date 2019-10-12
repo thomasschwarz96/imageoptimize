@@ -1,0 +1,93 @@
+/*
+|--------------------------------------------------------------------------
+| Main
+|--------------------------------------------------------------------------
+|
+| All main styles for main frontend.
+|
+*/
+a {
+  outline: 0;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.container--main {
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+| All header styles for main frontend.
+|
+*/
+
+
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+|
+| All content styles for main frontend.
+|
+*/
+#forkme {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1100;
+}
+
+.settings-container {
+  margin-top: 40px;
+  display: none;
+}
+
+.preview-image-wrapper {
+  text-align: right;
+}
+
+#changeSizeOptions,
+#setFilterOptions {
+  margin-top: 15px;
+}
+
+#setFilterOptions .col-6 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#setFilterOptions .col-6 .card {
+  min-height: 130px;
+}
+
+#uploadedImage,
+#optimizedImage {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid #343a40;
+  margin: 20px 0;
+  height: 300px;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+|
+| All footer styles for main frontend.
+|
+*/
+.footer {
+  font-size: 13px;
+  padding: 6px;
+}
