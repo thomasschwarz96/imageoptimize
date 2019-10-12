@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- IO assets -->
-    <link href="<?php echo base_url('assets/application/main.css'); ?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/application/css/main.css'); ?>" rel="stylesheet" />
 
     <!-- Bootstrap assets -->
     <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" />
