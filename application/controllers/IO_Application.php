@@ -1,8 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
-
+/**
+ * IO Application
+ *
+ * Class for main frontend.
+ *
+ * @package	ImageOptimize
+ * @author	Thomas Schwarz
+ * @copyright	Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
+ * @license	-
+ * @link	https://www.image-optimize.com/
+ * @since	Version 0.1.0
+ * @filesource
+ */
+class IO_Application extends IO_Base
+{
 	/**
 	 * Index Page for this controller.
 	 *
@@ -20,6 +33,6 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('application');
 	}
 }
