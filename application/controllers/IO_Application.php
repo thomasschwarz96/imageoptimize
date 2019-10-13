@@ -24,6 +24,26 @@ class IO_Application extends IO_Base
 	public $stats;
 
 	/**
+	 * Optimizer controller.
+	 *
+	 * @var IO_Optimizer
+	 */
+	public $optimizer;
+
+
+	/**
+	 * Creates statistics part of view data.
+	 */
+	private function _getStatisticsViewData()
+	{
+		return [
+			'optimizedImages' => $this->stats->optimizedImages,
+			'optimizedSize' => $this->stats->optimizedSize
+		];
+	}
+
+
+	/**
 	 * Class constructor.
 	 *
 	 * @return void
@@ -37,27 +57,69 @@ class IO_Application extends IO_Base
 
 
 	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 * Main application.
 	 */
 	public function index()
 	{
-		$viewData = [
-			'optimizedImages' => $this->stats->optimizedImages,
-			'optimizedSize' => $this->stats->optimizedSize
+		// Generate view data.
+		$viewData = $this->_getStatisticsViewData();
+		$viewData['contentView'] = 'components/upload';
+
+		// Load main application.
+		$this->load->view('application', $viewData);
+	}
+
+
+	/**
+	 * Upload form target.
+	 */
+	public function upload()
+	{
+		// Configuration for uploader.
+		$config = [
+			'upload_path' => FCPATH . 'uploads/',
+			'allowed_types' => 'jpg|png',
+			'max_size' => 2000,
+			'file_ext_tolower' => TRUE,
+			'overwrite' => TRUE,
+			'remove_spaces' => TRUE
 		];
 
-		$this->load->view('application', $viewData);
+		// Init uploader.
+		$this->upload->initialize($config);
+
+		// Make upload.
+		if (!$this->upload->do_upload('image'))
+		{
+			// Generate view data.
+			$viewData = [
+				'heading' => 'Whoops!',
+				'message' => 'Something went wrong :/ Please try again!'
+			];
+
+			// Load error view.
+			$this->load->view('errors/html/error_general', $viewData);
+    }
+		else
+		{
+			// Generate view data.
+			$viewData = $this->_getStatisticsViewData();
+			$viewData['contentView'] = 'components/optimize';
+			$viewData['image'] = $this->upload->file_name;
+
+			// Create new optimizer.
+			$this->optimizer = new IO_Optimizer($this->upload->file_name);
+
+			// Load main application.
+			$this->load->view('application', $viewData);
+    }
+	}
+
+	/**
+	 * Optimize form target.
+	 */
+	public function optimize()
+	{
+		echo "optimize";
 	}
 }

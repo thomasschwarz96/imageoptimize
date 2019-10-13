@@ -15,6 +15,10 @@ hr {
   margin-bottom: 2rem;
 }
 
+input {
+  cursor: pointer;
+}
+
 .container--main {
   padding-top: 80px;
   padding-bottom: 50px;
@@ -45,11 +49,6 @@ hr {
   z-index: 1100;
 }
 
-.settings-container {
-  margin-top: 40px;
-  display: none;
-}
-
 .preview-image-wrapper {
   text-align: right;
 }
@@ -57,6 +56,7 @@ hr {
 #changeSizeOptions,
 #setFilterOptions {
   margin-top: 15px;
+  display: none;
 }
 
 #setFilterOptions .col-6 {

@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<?php $this->view("components/forkme"); ?>
 
       <div class="container container--main">
-        <?php $this->view("components/upload"); ?>
+        <?php $this->view($contentView); ?>
       </div><!-- .container -->
 
       <?php $this->view("layout/footer"); ?>
