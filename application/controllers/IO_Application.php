@@ -1,4 +1,5 @@
 <?php
+session_start(); // TODO: TS - fix session loading!
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -22,13 +23,6 @@ class IO_Application extends IO_Base
 	 * @var IO_Statistics
 	 */
 	public $stats;
-
-	/**
-	 * Optimizer controller.
-	 *
-	 * @var IO_Optimizer
-	 */
-	public $optimizer;
 
 
 	/**
@@ -107,19 +101,34 @@ class IO_Application extends IO_Base
 			$viewData['contentView'] = 'components/optimize';
 			$viewData['image'] = $this->upload->file_name;
 
-			// Create new optimizer.
-			$this->optimizer = new IO_Optimizer($this->upload->file_name);
+			$_SESSION['uploadedImage'] = $this->upload; // TODO: TS - Update after session fixing
 
 			// Load main application.
 			$this->load->view('application', $viewData);
     }
 	}
 
+
 	/**
 	 * Optimize form target.
 	 */
 	public function optimize()
 	{
-		echo "optimize";
+		// Create new optimizer.
+		$optimizer = new IO_Optimizer($_SESSION['uploadedImage']); // TODO: TS - Update after session fixing
+
+		// Optimize image.
+		$optimizer->execute();
+
+		// Generate view data.
+		$viewData = $this->_getStatisticsViewData();
+		$viewData['contentView'] = 'components/optimize';
+
+		// Get image links.
+		$viewData['image'] = $optimizer->getUploadedImageName();
+		$viewData['preview'] = $optimizer->getNewImageName();
+
+		// Load main application.
+		$this->load->view('application', $viewData);
 	}
 }

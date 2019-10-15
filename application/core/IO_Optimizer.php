@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// Load image intervention.
+require_once FCPATH.'vendor/autoload.php';
+use Intervention\Image\ImageManager;
+
 /**
  * IO Optimizer
  *
@@ -17,25 +21,104 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class IO_Optimizer extends IO_Base
 {
   /**
-	 * File with all necessary statistics.
+	 * Path where images are stored.
 	 *
-	 * @var	file
+	 * @var	string
 	 */
-  private $_fileName;
+  private $_uploadPath;
+
+
+  /**
+	 * Prefix for new optimized image.
+	 *
+	 * @var	string
+	 */
+  private $_namePrefix;
+
+
+  /**
+	 * CI_Upload class, uploaded image.
+	 *
+	 * @var	CI_Upload
+	 */
+  private $_file;
+
+  /**
+	 * ImageManager class to make all changes on images.
+	 *
+	 * @var	ImageManager
+	 */
+  private $_manager;
+
+
+  /**
+	 * Create name for new optimized image.
+	 *
+	 * @return string
+	 */
+  private function _getNewOptimizedName()
+  {
+    return $this->_uploadPath .
+      $this->_namePrefix .
+      $this->_file->file_name;
+  }
 
   /**
 	 * Class constructor.
 	 *
-   * @param   $fileName   - Name of uploaded image
+   * @param   $file   - Uploaded image
 	 * @return  void
 	 */
-	public function __construct($fileName)
+	public function __construct($file)
 	{
     parent::__construct();
 
-    $this->_fileName = $fileName;
+    $this->_uploadPath = FCPATH . 'uploads/';
+    $this->_namePrefix = 'io_';
 
-    echo $this->_fileName;
+    // Clone given file object.
+    $this->_file = clone $file;
+
+    $this->_manager = new ImageManager([
+      'driver' => 'imagick'
+    ]);
+  }
+
+
+  /**
+   * Execute optimizing process for image.
+   *
+   * @return  void
+   */
+  public function execute()
+  {
+    $newName = $this->_getNewOptimizedName();
+    $fileName = $this->_uploadPath . $this->_file->file_name;
+
+    $image = $this->_manager->make($fileName)->greyscale();
+    $image->save($newName);
+  }
+
+
+  /**
+   * Get name of uploaded image.
+   *
+   * @return  String
+   */
+  public function getUploadedImageName()
+  {
+    return $this->_file->file_name;
+  }
+
+
+  /**
+   * Get name of new optimized image.
+   *
+   * @return  String
+   */
+  public function getNewImageName()
+  {
+    return $this->_namePrefix . $this->_file->file_name;
   }
 
 }
