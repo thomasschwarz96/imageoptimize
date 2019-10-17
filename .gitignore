@@ -1,0 +1,7 @@
+# excluded folders
+uploads/*
+sessions/*
+
+#exception for exclude
+!uploads/index.html
+!sessions/.gitkeep
