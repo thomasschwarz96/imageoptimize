@@ -50,6 +50,20 @@ class IO_Optimizer extends IO_Base
 	 */
   private $_manager;
 
+  /**
+   * Rules which specify how to optimize the image.
+   *
+   * @var IO_OptimzeRule[]
+   */
+  private $_ruleSet;
+
+  /**
+   * Form with all settings for rules.
+   *
+   * @var Array
+   */
+  private $_form;
+
 
   /**
 	 * Create name for new optimized image.
@@ -61,6 +75,22 @@ class IO_Optimizer extends IO_Base
     return $this->_uploadPath .
       $this->_namePrefix .
       $this->_file->file_name;
+  }
+
+
+  /**
+   * Get quality from form, if not set returns standard.
+   *
+   * @return integer
+   */
+  private function _getQuality()
+  {
+    if (isset($this->_form['quality']))
+    {
+      return $this->_form['quality'];
+    }
+
+    return 90;
   }
 
   /**
@@ -75,6 +105,8 @@ class IO_Optimizer extends IO_Base
 
     $this->_uploadPath = FCPATH . 'uploads/';
     $this->_namePrefix = 'io_';
+    $this->_ruleSet = [];
+    $this->_form = [];
 
     // Clone given file object.
     $this->_file = clone $file;
@@ -95,8 +127,42 @@ class IO_Optimizer extends IO_Base
     $newName = $this->_getNewOptimizedName();
     $fileName = $this->_uploadPath . $this->_file->file_name;
 
-    $image = $this->_manager->make($fileName)->greyscale();
-    $image->save($newName);
+    // Make intervention image.
+    $image = $this->_manager->make($fileName);
+
+    // Apply all rules on image.
+    foreach ($this->_ruleSet as $ruleClass)
+    {
+      $rule = new $ruleClass();
+      $rule->setOptions($this->_form);
+      $rule->setImage($image);
+      $image = $rule->execute();
+    }
+
+    // Save optimized image with new name.
+    $image->save($newName, $this->_getQuality());
+  }
+
+
+  /**
+   * Create rules by given form.
+   *
+   * @param   array   Form data
+   * @return  void
+   */
+  public function createRules($form)
+  {//print_r($form);
+    $this->_form = $form;
+    $rulePrefix = "IO_OptimizeRule";
+
+    foreach ($this->_form as $key => $entry)
+    {
+      $className = $rulePrefix . ucfirst($key);
+      if (class_exists($className))
+      {
+        array_push($this->_ruleSet, $className);
+      }
+    }
   }
 
 

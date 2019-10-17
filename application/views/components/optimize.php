@@ -11,7 +11,7 @@
         </div>
 
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="1" id="changeSize" name="changeSize" />
+          <input class="form-check-input" type="checkbox" id="changeSize" name="resize[]" />
           <label class="form-check-label" for="changeSize">
             Change image dimensions
           </label>
@@ -22,19 +22,19 @@
             <div class="col-5">
               <div class="input-group">
                 <input type="text" class="form-control" id="imageWidth"
-                       name="imageWidth" placeholder="width">
+                       name="resize[]" placeholder="width">
                 <div class="input-group-append">
                   <span class="input-group-text">px</span>
                 </div>
               </div>
             </div>
             <div class="col-2 text-center">
-              <input class="form-check-input" type="checkbox" value="1" id="fitToSize" name="fitToSize" />
+              <input class="form-check-input" type="checkbox" id="fitToSize" name="resize[]" />
             </div>
             <div class="col-5">
               <div class="input-group">
                 <input type="text" class="form-control" id="imageHeight"
-                       name="imageHeight" placeholder="height" disabled="disabled">
+                       name="resize[]" placeholder="height" disabled="disabled">
                 <div class="input-group-append">
                   <span class="input-group-text">px</span>
                 </div>

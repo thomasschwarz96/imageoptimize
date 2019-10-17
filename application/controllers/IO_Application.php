@@ -117,6 +117,9 @@ class IO_Application extends IO_Base
 		// Create new optimizer.
 		$optimizer = new IO_Optimizer($_SESSION['uploadedImage']); // TODO: TS - Update after session fixing
 
+		$form = $_POST;
+		$optimizer->createRules($form);
+
 		// Optimize image.
 		$optimizer->execute();
 
