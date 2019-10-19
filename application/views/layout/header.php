@@ -11,16 +11,17 @@
     <script src="<?php echo base_url('assets/application/js/jquery.session.js'); ?>"></script>
     <script src="<?php echo base_url('assets/application/js/jquery.loader.js'); ?>"></script>
 
+    <!-- Bootstrap assets -->
+    <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" />
+    <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
+
     <!-- IO classes -->
     <script src="<?php echo base_url('assets/application/js/IO_Ajax.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/application/js/IO_Alert.js'); ?>"></script>
 
     <!-- IO assets -->
     <link href="<?php echo base_url('assets/application/css/main.css'); ?>" rel="stylesheet" />
     <script src="<?php echo base_url('assets/application/js/main.js'); ?>"></script>
-
-    <!-- Bootstrap assets -->
-    <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" />
-    <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
 
     <title>Image Optimize</title>
 </head>

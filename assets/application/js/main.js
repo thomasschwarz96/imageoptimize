@@ -1,5 +1,8 @@
 jQuery(document).ready(function($) {
 
+  // Alert close fix.
+  $('.alert button.close').on('click', function() { new IO_Alert(); });
+
   // Show size options.
   $('#changeSize').click(function() {
     $('#changeSizeOptions').toggle();
@@ -34,6 +37,12 @@ jQuery(document).ready(function($) {
     var ajax = new IO_Ajax();
     ajax.path = 'optimize';
     ajax.setData(formData);
+    ajax.complete(function() {
+      var alert = new IO_Alert();
+      alert.text = "Preview succesfully generated!";
+      alert.style = IO_Alert.styles.primary;
+      alert.show();
+    });
     ajax.send();
   });
 

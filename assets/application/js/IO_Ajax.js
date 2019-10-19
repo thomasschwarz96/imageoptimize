@@ -32,6 +32,13 @@
       * @var  object
       */
      this.data = {};
+
+     /**
+      * Callback function when request is complete.
+      *
+      * @var  function
+      */
+     this.callback = undefined;
    }
 
 
@@ -71,6 +78,21 @@
 
 
    /**
+    * Set callback after request is complete.
+    *
+    * @param   function    callback    - Callback function
+    * @return  void
+    */
+   complete(callback)
+   {
+     if (typeof(callback) === "function")
+     {
+       this.callback = callback;
+     }
+   }
+
+
+   /**
     * Set data for request.
     *
     * @param   object    data    - Data for request
@@ -104,8 +126,8 @@
        data: this.data,
        type: 'POST',
        enctype: 'multipart/form-data',
-       success: this._success
+       success: this._success,
+       complete: this.callback
      });
    }
-
- }
+}
