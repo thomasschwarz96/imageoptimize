@@ -73,7 +73,7 @@ class IO_Application extends IO_Base
 		$config = [
 			'upload_path' => FCPATH . 'uploads/',
 			'allowed_types' => 'jpg|png',
-			'max_size' => 2000,
+			'max_size' => 6500, // 6.5 MB
 			'file_ext_tolower' => TRUE,
 			'overwrite' => TRUE,
 			'remove_spaces' => TRUE
