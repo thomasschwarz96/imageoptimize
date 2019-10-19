@@ -117,21 +117,15 @@ class IO_Application extends IO_Base
 		// Create new optimizer.
 		$optimizer = new IO_Optimizer($_SESSION['uploadedImage']); // TODO: TS - Update after session fixing
 
-		$form = $_POST;
+		$form = $this->input->post();
 		$optimizer->createRules($form);
 
 		// Optimize image.
 		$optimizer->execute();
 
-		// Generate view data.
-		$viewData = $this->_getStatisticsViewData();
-		$viewData['contentView'] = 'components/optimize';
-
 		// Get image links.
-		$viewData['image'] = $optimizer->getUploadedImageName();
-		$viewData['preview'] = $optimizer->getNewImageName();
+		$viewData['optimizedImage'] = $optimizer->getNewImageName();
 
-		// Load main application.
-		$this->load->view('application', $viewData);
+		echo json_encode($viewData);
 	}
 }

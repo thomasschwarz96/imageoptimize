@@ -12,5 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!-- .container -->
 
       <?php $this->view("layout/footer"); ?>
+      <?php $this->view("components/loader"); ?>
     </body>
 </html>

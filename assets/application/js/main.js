@@ -26,4 +26,15 @@ jQuery(document).ready(function($) {
     window.open(imageLink, '_blank');
   });
 
+  // Create preview image.
+  $('#preview').click(function(event) {
+    event.preventDefault();
+
+    var formData = $('form[name=optimize]').serialize();
+    var ajax = new IO_Ajax();
+    ajax.path = 'optimize';
+    ajax.setData(formData);
+    ajax.send();
+  });
+
 });

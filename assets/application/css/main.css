@@ -79,6 +79,35 @@ input {
   cursor: pointer;
 }
 
+#io-loader {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+#io-loader .loader {
+  background-image: url('/imageoptimize/assets/application/images/loader.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+}
+
 
 /*
 |--------------------------------------------------------------------------

@@ -116,7 +116,7 @@
         </div><!-- #setFilterOptions -->
         <hr />
         <div class="form-group">
-          <input type="submit" class="btn btn-primary" value="Preview" />
+          <a href="#" id="preview" class="btn btn-primary" target="_blank">Preview</a>
           <a href="#" id="download" class="btn btn-success" target="_blank" download>Download</a>
         </div>
 
