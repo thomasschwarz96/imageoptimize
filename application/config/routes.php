@@ -53,4 +53,5 @@ $route['default_controller'] = 'IO_Application';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['upload'] = 'IO_Application/upload';
+$route['download'] = 'IO_Application/download';
 $route['optimize'] = 'IO_Application/optimize';

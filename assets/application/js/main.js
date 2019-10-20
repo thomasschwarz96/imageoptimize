@@ -48,12 +48,24 @@ jQuery(document).ready(function($) {
     var ajax = new IO_Ajax();
     ajax.path = 'optimize';
     ajax.setData(formData);
-    ajax.complete(function() {
-      setTimeout(function(){
-        $('.alert button.close').click();
-      }, 3000);
-    });
+    ajax.complete(closeAlert());
     ajax.send();
+
+    $('#download').fadeIn(500);
   });
+
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | Helper functions
+  |--------------------------------------------------------------------------
+  */
+  function closeAlert()
+  {
+    setTimeout(function(){
+      $('.alert button.close').click();
+    }, 3000);
+  }
 
 });

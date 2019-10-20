@@ -123,6 +123,9 @@ class IO_Application extends IO_Base
 		// Optimize image.
 		$optimizer->execute();
 
+		// Add new image name to session.
+		$_SESSION['optimizedImageName'] = $optimizer->getNewImageName();
+
 		// Get alert mesasge.
 		$alertData = ['alertText' => "Preview succesfully generated!"];
 		$viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
@@ -135,5 +138,21 @@ class IO_Application extends IO_Base
 		$viewData['images'] = $this->load->view('components/preview-image', $imagesData, TRUE);
 
 		echo json_encode($viewData);
+	}
+
+
+	/**
+	 * Download target for ajax.
+	 */
+	public function download()
+	{		
+		// Create download path.
+		$imageName = $_SESSION['optimizedImageName'];
+		$fullPath = FCPATH . 'uploads/' . $imageName;
+
+		// Load file helper.
+		$this->load->helper('download');
+
+		force_download($fullPath, NULL);
 	}
 }

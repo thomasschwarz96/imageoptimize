@@ -67,6 +67,10 @@ input {
   min-height: 130px;
 }
 
+#download {
+  display: none;
+}
+
 #uploadedImage,
 #optimizedImage {
   position: relative;
