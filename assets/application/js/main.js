@@ -1,17 +1,21 @@
 jQuery(document).ready(function($) {
 
-  // Alert close fix.
-  $('.alert button.close').on('click', function() { new IO_Alert(); });
-
+  /*
+  |--------------------------------------------------------------------------
+  | General UI control
+  |--------------------------------------------------------------------------
+  */
   // Show size options.
   $('#changeSize').click(function() {
     $('#changeSizeOptions').toggle();
   });
 
+
   // Show filter options.
   $('#setFilter').click(function() {
     $('#setFilterOptions').toggle();
   });
+
 
   // Enable 'height' input field.
   $('#fitToSize').click(function() {
@@ -23,12 +27,19 @@ jQuery(document).ready(function($) {
     }
   });
 
+
   // Open uploaded, optimized image in new tab.
-  $('#uploadedImage, #optimizedImage').click(function() {
+  $(document).on('click', '#uploadedImage, #optimizedImage', function() {
     var imageLink = $(this).attr('data-image');
     window.open(imageLink, '_blank');
   });
 
+
+  /*
+  |--------------------------------------------------------------------------
+  | Ajax requests
+  |--------------------------------------------------------------------------
+  */
   // Create preview image.
   $('#preview').click(function(event) {
     event.preventDefault();
@@ -38,10 +49,9 @@ jQuery(document).ready(function($) {
     ajax.path = 'optimize';
     ajax.setData(formData);
     ajax.complete(function() {
-      var alert = new IO_Alert();
-      alert.text = "Preview succesfully generated!";
-      alert.style = IO_Alert.styles.primary;
-      alert.show();
+      setTimeout(function(){
+        $('.alert button.close').click();
+      }, 3000);
     });
     ajax.send();
   });

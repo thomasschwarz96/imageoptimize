@@ -123,8 +123,16 @@ class IO_Application extends IO_Base
 		// Optimize image.
 		$optimizer->execute();
 
-		// Get image links.
-		$viewData['optimizedImage'] = $optimizer->getNewImageName();
+		// Get alert mesasge.
+		$alertData = ['alertText' => "Preview succesfully generated!"];
+		$viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
+
+		// Get images.
+		$imagesData = [
+			'image' => $optimizer->getUploadedImageName(),
+			'preview' => $optimizer->getNewImageName()
+		];
+		$viewData['images'] = $this->load->view('components/preview-image', $imagesData, TRUE);
 
 		echo json_encode($viewData);
 	}

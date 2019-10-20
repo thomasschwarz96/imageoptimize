@@ -13,7 +13,7 @@
       </div><!-- .upload-container -->
     </div>
 
-    <div class="col-xs-12 col-sm-6">
+    <div class="ajaxTarget-images col-xs-12 col-sm-6">
       <?php $this->view('components/preview-image'); ?>
     </div>
 

@@ -51,9 +51,6 @@
     */
    _success(data)
    {
-     // Create base path.
-     var basePath = "http://localhost/imageoptimize/uploads/";
-
      // Parse data.
      var objectData = JSON.parse(data);
      if (!objectData)
@@ -61,15 +58,16 @@
        return;
      }
 
-     // Render optimized image
+     // Render ajaxTarget's in DOM.
      for (var key in objectData)
      {
-       var $domTarget = $('#' + key);
-       var imageLink = basePath + objectData[key] + '?ver=' + Date.now();
-       $domTarget.attr("data-image",imageLink);
-       $domTarget.css({
-         backgroundImage: 'url(' + imageLink + ')'
-       });
+       var $domTarget = $('.ajaxTarget-' + key);
+
+       // Check if ajaxTarget exists.
+       if ($domTarget.length)
+       {
+         $domTarget.html(objectData[key]);
+       }
      }
 
      // Hide loader.

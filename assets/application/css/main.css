@@ -113,7 +113,6 @@ input {
   top: 30px;
   right: 30px;
   z-index: 1110;
-  display: none;
 }
 .alert button.close {
   outline: 0;
