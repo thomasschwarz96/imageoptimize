@@ -12,7 +12,7 @@
 
   <?php if (isset($preview)) : ?>
     data-image="<?php echo base_url('uploads/') . $preview; ?>"
-    style="background-image: url(<?php echo base_url('uploads/') . $preview; ?>);"
+    style="background-image: url(<?php echo base_url('uploads/') . $preview . '?ver=' . time(); ?>);"
   <?php endif; ?>
 
   ></div>
