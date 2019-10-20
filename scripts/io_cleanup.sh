@@ -13,6 +13,7 @@ printf "${COLOR}===========================${NOCOLOR}\n"
 printf "${COLOR}IO Cleanup is preparing...${NOCOLOR}\n"
 
 printf "Creating variables..."
+scriptPath="$( cd "$(dirname "$0")" ; pwd -P )"
 uploadPath="../uploads/"
 cleanupExclude="index.html"
 printf "\n\n"
@@ -21,6 +22,7 @@ printf "${COLOR}===========================${NOCOLOR}\n"
 printf "${COLOR}IO Cleanup is starting...${NOCOLOR}\n"
 
 printf "Changing directory to: "
+cd $scriptPath
 cd $uploadPath
 pwd
 
