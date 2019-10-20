@@ -33,6 +33,14 @@ class IO_Statistics extends IO_Base
 
 
   /**
+   * Optimized size in bytes (not converted).
+   *
+   * @var  integer
+   */
+  private $_size;
+
+
+  /**
  	 * Number of total optimized images.
  	 *
  	 * @var	integer
@@ -56,7 +64,7 @@ class IO_Statistics extends IO_Base
   {
     // Update JSON.
     $this->_json['optimizedImages'] = $this->optimizedImages;
-    $this->_json['optimizedSize'] = $this->optimizedSize;
+    $this->_json['optimizedSize'] = $this->_size;
 
     // Write JSON to file.
     $success = file_put_contents(
@@ -69,12 +77,14 @@ class IO_Statistics extends IO_Base
 
    /**
     * Convert optimized size from Bytes to GB.
+    *
+    * @return integer
     */
    private function _convertOptimizedSize()
    {
-     $gbSize = $this->optimizedSize / 1024 / 1024 / 1024;
+     $gbSize = $this->_size / 1024 / 1024 / 1024;
 
-     $this->optimizedSize = round($gbSize, 2);
+     return round($gbSize, 3);
    }
 
   /**
@@ -95,10 +105,9 @@ class IO_Statistics extends IO_Base
     );
 
     // Init values.
+    $this->_size = intval($this->_json['optimizedSize']);
     $this->optimizedImages = intval($this->_json['optimizedImages']);
-    $this->optimizedSize = intval($this->_json['optimizedSize']);
-
-    $this->_convertOptimizedSize();
+    $this->optimizedSize = $this->_convertOptimizedSize();
   }
 
   /**
@@ -123,8 +132,8 @@ class IO_Statistics extends IO_Base
 	 */
 	public function updateOverallOptimized($newOptimizedSize)
   {
-		// Increase size of 'overallOptimized'.
-		$this->optimizedSize += $newOptimizedSize;
+    // Increase size of 'overallOptimized'.
+    $this->_size += intval($newOptimizedSize);
 
 		return $this->_updateFile();
 	}

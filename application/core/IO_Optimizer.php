@@ -66,6 +66,14 @@ class IO_Optimizer extends IO_Base
 
 
   /**
+   * Filesize of current image.
+   *
+   * @var Integer
+   */
+  private $_filesize;
+
+
+  /**
 	 * Create name for new optimized image.
 	 *
 	 * @return string
@@ -107,6 +115,7 @@ class IO_Optimizer extends IO_Base
     $this->_namePrefix = 'io_';
     $this->_ruleSet = [];
     $this->_form = [];
+    $this->_filesize = 0;
 
     // Clone given file object.
     $this->_file = clone $file;
@@ -140,7 +149,10 @@ class IO_Optimizer extends IO_Base
     }
 
     // Save optimized image with new name.
-    $image->save($newName, $this->_getQuality());
+    $image = $image->save($newName, $this->_getQuality());
+
+    // Update current filesize.
+    $this->_filesize = $image->filesize();
   }
 
 
@@ -185,6 +197,17 @@ class IO_Optimizer extends IO_Base
   public function getNewImageName()
   {
     return $this->_namePrefix . $this->_file->file_name;
+  }
+
+
+  /**
+   * Get filesize of current image.
+   *
+   * @return  Integer
+   */
+  public function getFilesize()
+  {
+    return $this->_filesize;
   }
 
 }

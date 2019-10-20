@@ -102,6 +102,7 @@ class IO_Application extends IO_Base
 			$viewData['image'] = $this->upload->file_name;
 
 			$_SESSION['uploadedImage'] = $this->upload; // TODO: TS - Update after session fixing
+			$_SESSION['filesize'] = $this->upload->file_size * 1024; // Convert to bytes
 
 			// Load main application.
 			$this->load->view('application', $viewData);
@@ -117,11 +118,15 @@ class IO_Application extends IO_Base
 		// Create new optimizer.
 		$optimizer = new IO_Optimizer($_SESSION['uploadedImage']); // TODO: TS - Update after session fixing
 
+		// Create optimizing rules depending on user selection.
 		$form = $this->input->post();
 		$optimizer->createRules($form);
 
 		// Optimize image.
 		$optimizer->execute();
+
+		// Add optimized filesize in session.
+		$_SESSION['optimizedSize'] = $_SESSION['filesize'] - $optimizer->getFilesize();
 
 		// Add new image name to session.
 		$_SESSION['optimizedImageName'] = $optimizer->getNewImageName();
@@ -145,7 +150,11 @@ class IO_Application extends IO_Base
 	 * Download target for ajax.
 	 */
 	public function download()
-	{		
+	{
+		// Update statistics.
+		$this->stats->newDownload();
+		$this->stats->updateOverallOptimized($_SESSION['optimizedSize']);
+
 		// Create download path.
 		$imageName = $_SESSION['optimizedImageName'];
 		$fullPath = FCPATH . 'uploads/' . $imageName;
