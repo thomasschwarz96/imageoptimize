@@ -9,7 +9,7 @@
 */
 function load_io_classes()
 {
-  spl_autoload_register('io_classes');
+    spl_autoload_register('io_classes');
 }
 
 /*
@@ -23,11 +23,21 @@ function load_io_classes()
 */
 function io_classes($class)
 {
-  if (strpos($class, 'CI_') !== 0)
-  {
-    if (is_readable(APPPATH . 'core/' . $class . '.php'))
+    if (strpos($class, 'CI_') === 0)
     {
-      require_once(APPPATH . 'core/' . $class . '.php');
+        return;
     }
-  }
+
+    $paths = array(
+        'core/',
+        'core/optimizeRules/'
+    );
+
+    foreach ($paths as $path)
+    {
+        if (is_readable(APPPATH . $path . $class . '.php'))
+        {
+            require_once(APPPATH . $path . $class . '.php');
+        }
+    }
 }
