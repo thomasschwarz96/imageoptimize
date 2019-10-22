@@ -25,7 +25,7 @@ class IO_OptimizeRule
     /**
      * Image to apply rule on.
      *
-     * @var image
+     * @var Intervention\Image\Image|boolean
      */
     protected $_image;
 
@@ -66,9 +66,10 @@ class IO_OptimizeRule
     /**
      * Apply rule to current image.
      *
-     * @return image
+     * @return Intervention\Image\Image|boolean
      */
     public function execute()
     {
+        return false;
     }
 }

@@ -15,9 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class IO_OptimizeRuleInvert extends IO_OptimizeRule
 {
     /**
-     * Apply rule to current image.
-     *
-     * @return image|boolean
+     * @inheritDoc
      */
     public function execute()
     {

@@ -19,7 +19,7 @@ class IO_Statistics extends IO_Base
     /**
      * File with all necessary statistics.
      *
-     * @var    file
+     * @var    array|boolean
      */
     private $_statFile;
 

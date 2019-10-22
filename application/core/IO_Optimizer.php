@@ -54,14 +54,14 @@ class IO_Optimizer extends IO_Base
     /**
      * Rules which specify how to optimize the image.
      *
-     * @var IO_OptimzeRule[]
+     * @var IO_OptimizeRule[]
      */
     private $_ruleSet;
 
     /**
      * Form with all settings for rules.
      *
-     * @var Array
+     * @var array
      */
     private $_form;
 

@@ -85,9 +85,7 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
 
 
     /**
-     * Apply rule to current image.
-     *
-     * @return image
+     * @inheritDoc
      */
     public function execute()
     {
