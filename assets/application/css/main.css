@@ -48,6 +48,18 @@ input {
   right: 0;
   z-index: 1100;
 }
+@media screen and (max-width: 480px)
+{
+  #forkme {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+#forkme img {
+  height: auto;
+  width: 100%;
+}
 
 .preview-image-wrapper {
   text-align: right;
