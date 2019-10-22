@@ -89,24 +89,27 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
      */
     public function execute()
     {
-        if ($this->_width || $this->_height)
+        if (!$this->_width)
         {
-            // Keep ratio.
-            if ($this->_aspectRatio)
-            {
-                return $this->_image->resize($this->_width, $this->_height);
-            }
+            return $this->_image;
+        }
 
+        // TODO: TS - Improve code!
+        if ($this->_aspectRatio)
+        {
             return $this->_image->resize(
                 $this->_width,
-                $this->_height,
-                function ($constraint)
-                {
-                    $constraint->aspectRatio();
-                }
+                $this->_height
             );
         }
 
-        return $this->_image;
+        return $this->_image->resize(
+            $this->_width,
+            $this->_height,
+            function ($constraint)
+            {
+                $constraint->aspectRatio();
+            }
+        );
     }
 }
