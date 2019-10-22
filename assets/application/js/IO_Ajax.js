@@ -14,7 +14,7 @@ class IO_Ajax
     /**
      * Class constructor.
      *
-     * @param   {string}    path (optional)    - Path where the ajax call should go
+     * @param   {string}    [path]    - Path where the ajax call should go
      * @return  void
      */
     constructor(path)
@@ -124,6 +124,8 @@ class IO_Ajax
             data: this.data,
             type: 'POST',
             enctype: 'multipart/form-data',
+            contentType: false,
+            processData: false,
             success: this._success,
             complete: this.callback
         });

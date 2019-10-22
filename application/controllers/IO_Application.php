@@ -79,34 +79,34 @@ class IO_Application extends IO_Base
             'remove_spaces' => TRUE
         );
 
+        // Generate view data.
+        $viewData = $this->_getStatisticsViewData();
+        $viewData['contentView'] = 'components/optimize';
+
         // Init uploader.
         $this->upload->initialize($config);
 
         // Make upload.
         if (!$this->upload->do_upload('image'))
         {
-            // Generate view data.
-            $viewData = array(
-                'heading' => 'Whoops!',
-                'message' => 'Something went wrong :/ Please try again!'
+            // Create alert message.
+            $alertData = array(
+                'alertText' => "The Upload gone wrong!",
+                'alertStyle' => 'danger'
             );
-
-            // Load error view.
-            $this->load->view('errors/html/error_general', $viewData);
+            $viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
         }
         else
         {
-            // Generate view data.
-            $viewData = $this->_getStatisticsViewData();
-            $viewData['contentView'] = 'components/optimize';
             $viewData['image'] = $this->upload->file_name;
-
             $_SESSION['uploadedImage'] = $this->upload; // TODO: TS - Update after session fixing
             $_SESSION['filesize'] = $this->upload->file_size * 1024; // Convert to bytes
-
-            // Load main application.
-            $this->load->view('application', $viewData);
         }
+
+        // Load main application.
+        $viewData['content'] = $this->load->view('components/optimize', $viewData, true);
+
+        echo json_encode($viewData);
     }
 
 
@@ -125,10 +125,8 @@ class IO_Application extends IO_Base
         // Optimize image.
         $optimizer->execute();
 
-        // Add optimized filesize in session.
+        // Update session data.
         $_SESSION['optimizedSize'] = $_SESSION['filesize'] - $optimizer->getFilesize();
-
-        // Add new image name to session.
         $_SESSION['optimizedImageName'] = $optimizer->getNewImageName();
 
         // Get alert mesasge.

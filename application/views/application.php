@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php $this->view("layout/navigation"); ?>
 			<?php $this->view("components/forkme"); ?>
 
-      <div class="container container--main">
+      <div class="ajaxTarget-content container container--main">
         <?php
         if (isset($contentView))
         {

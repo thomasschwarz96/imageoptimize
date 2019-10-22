@@ -1,4 +1,4 @@
-<form action="<?php echo base_url('upload'); ?>" name="optimize" method="post" enctype="multipart/form-data">
+<form action="<?php echo base_url('upload'); ?>" name="upload" method="post" enctype="multipart/form-data">
 
   <div class="row">
     <div class="col-xs-12 col-sm-6">
@@ -8,7 +8,7 @@
           <label for="image">Image</label>
           <input type="file" class="form-control-file" id="image" name="image" value="" />
         </div>
-        <input type="submit" value="Upload" />
+        <input id="upload" type="submit" value="Upload" />
 
       </div><!-- .upload-container -->
     </div>

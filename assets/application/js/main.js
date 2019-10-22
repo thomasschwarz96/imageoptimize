@@ -7,21 +7,21 @@ jQuery(document).ready(function ($)
     |--------------------------------------------------------------------------
     */
     // Show size options.
-    $('#changeSize').click(function ()
+    $(document).on('click', '#changeSize', function ()
     {
         $('#changeSizeOptions').toggle();
     });
 
 
     // Show filter options.
-    $('#setFilter').click(function ()
+    $(document).on('click', '#setFilter', function ()
     {
         $('#setFilterOptions').toggle();
     });
 
 
     // Enable 'height' input field.
-    $('#fitToSize').click(function ()
+    $(document).on('click', '#fitToSize', function ()
     {
         var $inputImageHeight = $('#imageHeight');
         if (this.checked)
@@ -48,12 +48,34 @@ jQuery(document).ready(function ($)
     | Ajax requests
     |--------------------------------------------------------------------------
     */
-    // Create preview image.
-    $('#preview').click(function (event)
+    // Upload selected image.
+    $(document).on('click', '#upload', function (event)
     {
         event.preventDefault();
 
-        var formData = $('form[name=optimize]').serialize();
+        // Create new formData object.
+        var formData = new FormData(),
+            image = $('input#image')[0].files[0];
+
+        // Append _token and image to formData.
+        formData.append('image', image);
+
+
+        var ajax = new IO_Ajax();
+        ajax.path = 'upload';
+        ajax.setData(formData);
+        ajax.complete(closeAlert());
+        ajax.send();
+    });
+
+
+    // Create preview image.
+    $(document).on('click', '#preview', function (event)
+    {
+        event.preventDefault();
+
+        // Create new formData object.
+        var formData = new FormData($('form[name=optimize]')[0]);
         var ajax = new IO_Ajax();
         ajax.path = 'optimize';
         ajax.setData(formData);
