@@ -28,8 +28,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-2 text-center">
-              <input class="form-check-input" type="checkbox" id="fitToSize" name="resize[]" />
+            <div class="col-2 text-center fit-size-container">
+                <span id="fitToSizeIcon" class="fas fa-link"></span>
+                <input class="form-check-input" type="checkbox" id="fitToSize" name="resize[]" />
             </div>
             <div class="col-5">
               <div class="input-group">

@@ -12,6 +12,12 @@ jQuery(document).ready(function ($)
         $('#changeSizeOptions').toggle();
     });
 
+    // Fit to size click
+    $(document).on('click',  '#fitToSize', function()
+    {
+        $('#fitToSizeIcon').toggleClass('active fa-unlink');
+    });
+
 
     // Show filter options.
     $(document).on('click', '#setFilter', function ()

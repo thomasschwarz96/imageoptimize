@@ -65,6 +65,22 @@ input {
   text-align: right;
 }
 
+.fit-size-container {
+  padding-top: 6px;
+}
+#fitToSize {
+  margin-top: 0;
+  height: 25px;
+  width: 25px;
+  opacity: 0;
+}
+#fitToSizeIcon {
+  color: #6c757d;
+}
+#fitToSizeIcon.active {
+  color: #007bff;
+}
+
 #changeSizeOptions,
 #setFilterOptions {
   margin-top: 15px;
