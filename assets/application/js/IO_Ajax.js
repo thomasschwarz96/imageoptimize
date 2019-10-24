@@ -43,6 +43,29 @@ class IO_Ajax
 
 
     /**
+     * Render templates into DOM.
+     *
+     * @param    {string}   templates    - Request result
+     * @return   void
+     * @private
+     */
+    _render(templates)
+    {
+        // Render ajaxTarget's in DOM.
+        for (let key in templates)
+        {
+            let $domTarget = $('.ajaxTarget-' + key);
+
+            // Check if ajaxTarget exists.
+            if ($domTarget.length)
+            {
+                $domTarget.html(templates[key]);
+            }
+        }
+    }
+
+
+    /**
      * Callback for succesfull request.
      *
      * @param    {string}   data    - Request result
@@ -52,23 +75,13 @@ class IO_Ajax
     _success(data)
     {
         // Parse data.
-        var objectData = JSON.parse(data);
+        let objectData = JSON.parse(data);
         if (!objectData)
         {
             return;
         }
 
-        // Render ajaxTarget's in DOM.
-        for (var key in objectData)
-        {
-            var $domTarget = $('.ajaxTarget-' + key);
-
-            // Check if ajaxTarget exists.
-            if ($domTarget.length)
-            {
-                $domTarget.html(objectData[key]);
-            }
-        }
+        this._render(objectData);
 
         // Hide loader.
         $.hideIoLoader();
@@ -118,6 +131,7 @@ class IO_Ajax
         // Show loader.
         $.showIoLoader();
 
+        let wrapThis = this;
         // Make request.
         $.ajax({
             url: this.path,
@@ -126,8 +140,15 @@ class IO_Ajax
             enctype: 'multipart/form-data',
             contentType: false,
             processData: false,
-            success: this._success,
-            complete: this.callback
+            success: function (response) {
+                wrapThis._success(response);
+            },
+            complete: function (response) {
+                if (typeof(wrapThis.callback) === "function")
+                {
+                    wrapThis.callback(response);
+                }
+            }
         });
     }
 }

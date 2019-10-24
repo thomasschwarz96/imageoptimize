@@ -64,7 +64,7 @@ jQuery(document).ready(function ($)
         var ajax = new IO_Ajax();
         ajax.path = 'upload';
         ajax.setData(formData);
-        ajax.complete(closeAlert());
+        ajax.complete(closeAlert);
         ajax.send();
     });
 
@@ -79,7 +79,7 @@ jQuery(document).ready(function ($)
         var ajax = new IO_Ajax();
         ajax.path = 'optimize';
         ajax.setData(formData);
-        ajax.complete(closeAlert());
+        ajax.complete(closeAlert);
         ajax.send();
 
         $('#download').fadeIn(500);
