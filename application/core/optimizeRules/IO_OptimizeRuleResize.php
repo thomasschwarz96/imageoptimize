@@ -31,11 +31,19 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
 
 
     /**
-     * Determine if aspectRatio is needed.
+     * Determines if we should keep ratio.
      *
      * @var boolean
      */
-    private $_aspectRatio;
+    private $_keepRatio;
+
+
+    /**
+     * Callback for keeping ratio (for resize() method).
+     *
+     * @var callback
+     */
+    private $_ratioCallback;
 
 
     /**
@@ -47,7 +55,12 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
 
         $this->_width = NULL;
         $this->_height = NULL;
-        $this->_aspectRatio = FALSE;
+        $this->_keepRatio = TRUE;
+
+        $this->_ratioCallback = function ($constraint)
+        {
+            $constraint->aspectRatio();
+        };
     }
 
 
@@ -73,7 +86,8 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
         // Check if aspect ratio was checked.
         if (isset($resize[2]))
         {
-            $this->_aspectRatio = TRUE;
+            $this->_keepRatio = FALSE;
+            $this->_ratioCallback = NULL;
         }
 
         // Check if height was entered.
@@ -94,22 +108,10 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
             return $this->_image;
         }
 
-        // TODO: TS - Improve code!
-        if ($this->_aspectRatio)
-        {
-            return $this->_image->resize(
-                $this->_width,
-                $this->_height
-            );
-        }
-
         return $this->_image->resize(
             $this->_width,
             $this->_height,
-            function ($constraint)
-            {
-                $constraint->aspectRatio();
-            }
+            $this->_ratioCallback
         );
     }
 }
