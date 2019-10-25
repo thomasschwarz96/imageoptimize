@@ -4,3 +4,6 @@
 Check it out here: www.image-optimize.com
 
 If you got some questions, check out our wiki.
+
+====
+License coming soon!
