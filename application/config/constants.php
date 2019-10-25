@@ -94,3 +94,6 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 */
 define('VIEWS_PATH', FCPATH . 'application/views/');
 define('OPTIMIZE_RULES_PATH', VIEWS_PATH . 'optimizeRules/');
+
+define('IO_CORE_PATH', APPPATH . 'core/');
+define('IO_OPTIMIZE_RULES_PATH', IO_CORE_PATH . 'optimizeRules/');

@@ -29,15 +29,16 @@ function io_classes($class)
     }
 
     $paths = array(
-        'core/',
-        'core/optimizeRules/'
+        IO_CORE_PATH,
+        IO_OPTIMIZE_RULES_PATH
     );
 
     foreach ($paths as $path)
     {
-        if (is_readable(APPPATH . $path . $class . '.php'))
+        $classPath = $path . $class . '.php';
+        if (is_readable($classPath))
         {
-            require_once(APPPATH . $path . $class . '.php');
+            require_once($classPath);
         }
     }
 }
