@@ -29,7 +29,7 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
     {
         parent::__construct();
 
-        $this->_amount = 0;
+        $this->_amount = FALSE;
     }
 
 
@@ -38,7 +38,7 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['blur']))
+        if (!isset($options['blur']) &&  count($options['blur']) === 1)
         {
             return;
         }
@@ -56,6 +56,10 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
      */
     public function execute()
     {
+        if (!$this->_amount)
+        {
+            return $this->_image;
+        }
         return $this->_image->blur($this->_amount);
     }
 }

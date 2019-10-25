@@ -29,7 +29,7 @@ class IO_OptimizeRuleGamma extends IO_OptimizeRule
     {
         parent::__construct();
 
-        $this->_correction = 0;
+        $this->_correction = FALSE;
     }
 
 
@@ -38,7 +38,7 @@ class IO_OptimizeRuleGamma extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['gamma']))
+        if (!isset($options['gamma']) && count($options['gamma']) === 1)
         {
             return;
         }
@@ -54,6 +54,10 @@ class IO_OptimizeRuleGamma extends IO_OptimizeRule
      */
     public function execute()
     {
+        if (!$this->_correction)
+        {
+            return $this->_image;
+        }
         return $this->_image->gamma($this->_correction);
     }
 }
