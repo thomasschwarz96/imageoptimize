@@ -155,6 +155,9 @@ class IO_Optimizer extends IO_Base
 
         // Update current filesize.
         $this->_filesize = $image->filesize();
+
+        // Frees associated memory.
+        $image->destroy();
     }
 
 
