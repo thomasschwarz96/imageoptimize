@@ -6,7 +6,7 @@
             </label>
             <p class="card-text">Add blur effect to image.</p>
 
-            <div class="input-group mb-3">
+            <div class="input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <input type="checkbox" id="blur" name="blur[]">

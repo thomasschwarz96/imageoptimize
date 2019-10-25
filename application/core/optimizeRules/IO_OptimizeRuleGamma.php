@@ -15,10 +15,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class IO_OptimizeRuleGamma extends IO_OptimizeRule
 {
     /**
+     * Correction for gamma.
+     *
+     * @var float
+     */
+    private $_correction;
+
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->_correction = 0;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function setOptions($options)
+    {
+        if (!isset($options['gamma']))
+        {
+            return;
+        }
+        $gamma = $options['gamma'];
+
+        if (isset($gamma[1]))
+        {
+            $this->_correction = $gamma[1];
+        }
+    }
+    /**
      * @inheritDoc
      */
     public function execute()
     {
-        return $this->_image->gamma(1.6);
+        return $this->_image->gamma($this->_correction);
     }
 }
