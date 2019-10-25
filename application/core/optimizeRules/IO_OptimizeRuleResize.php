@@ -65,9 +65,7 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
 
 
     /**
-     * Set options for correct execute.
-     *
-     * @return void
+     * @inheritDoc
      */
     public function setOptions($options)
     {

@@ -15,10 +15,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class IO_OptimizeRuleBlur extends IO_OptimizeRule
 {
     /**
+     * Amount for blur.
+     *
+     * @var integer
+     */
+    private $_amount;
+
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->_amount = 0;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function setOptions($options)
+    {
+        if (!isset($options['blur']))
+        {
+            return;
+        }
+        $blur = $options['blur'];
+
+        if (isset($blur[1]))
+        {
+            $this->_amount = $blur[1];
+        }
+    }
+
+
+    /**
      * @inheritDoc
      */
     public function execute()
     {
-        return $this->_image->blur(15);
+        return $this->_image->blur($this->_amount);
     }
 }
