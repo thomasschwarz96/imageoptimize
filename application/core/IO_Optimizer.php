@@ -133,7 +133,7 @@ class IO_Optimizer extends IO_Base
     {
         parent::__construct();
 
-        $this->_uploadPath = FCPATH . 'uploads/';
+        $this->_uploadPath = IO_UPLOAD_PATH;
         $this->_namePrefix = 'io_';
         $this->_ruleSet = array();
         $this->_form = array();

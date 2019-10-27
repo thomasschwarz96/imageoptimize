@@ -1,5 +1,5 @@
 <?php
-session_start(); // TODO: TS - fix session loading!
+session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -17,6 +17,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class IO_Application extends IO_Base
 {
+    /**
+     * Configuration for uploader.
+     *
+     * @var Array
+     */
+    private $_uploadConfig;
+
+
     /**
      * Statistic controller.
      *
@@ -46,6 +54,14 @@ class IO_Application extends IO_Base
     {
         parent::__construct();
 
+        $this->_uploadConfig = array(
+            'upload_path' => IO_UPLOAD_PATH,
+            'allowed_types' => 'jpg|png',
+            'max_size' => 6500, // 6.5 MB
+            'file_ext_tolower' => TRUE,
+            'overwrite' => FALSE,
+            'remove_spaces' => TRUE
+        );
         $this->stats = new IO_Statistics();
     }
 
@@ -69,22 +85,12 @@ class IO_Application extends IO_Base
      */
     public function upload()
     {
-        // Configuration for uploader.
-        $config = array(
-            'upload_path' => FCPATH . 'uploads/',
-            'allowed_types' => 'jpg|png',
-            'max_size' => 6500, // 6.5 MB
-            'file_ext_tolower' => TRUE,
-            'overwrite' => TRUE,
-            'remove_spaces' => TRUE
-        );
-
         // Generate view data.
         $viewData = $this->_getStatisticsViewData();
         $viewData['contentView'] = 'components/optimize';
 
         // Init uploader.
-        $this->upload->initialize($config);
+        $this->upload->initialize($this->_uploadConfig);
 
         // Make upload.
         if (!$this->upload->do_upload('image'))
@@ -99,7 +105,7 @@ class IO_Application extends IO_Base
         else
         {
             $viewData['image'] = $this->upload->file_name;
-            $_SESSION['uploadedImage'] = $this->upload; // TODO: TS - Update after session fixing
+            $_SESSION['uploadedImage'] = $this->upload;
             $_SESSION['filesize'] = $this->upload->file_size * 1024; // Convert to bytes
         }
 
@@ -116,7 +122,7 @@ class IO_Application extends IO_Base
     public function optimize()
     {
         // Create new optimizer.
-        $optimizer = new IO_Optimizer($_SESSION['uploadedImage']); // TODO: TS - Update after session fixing
+        $optimizer = new IO_Optimizer($_SESSION['uploadedImage']);
 
         // Create optimizing rules depending on user selection.
         $form = $this->input->post();
@@ -155,7 +161,7 @@ class IO_Application extends IO_Base
 
         // Create download path.
         $imageName = $_SESSION['optimizedImageName'];
-        $fullPath = FCPATH . 'uploads/' . $imageName;
+        $fullPath = IO_UPLOAD_PATH . $imageName;
 
         // Load file helper.
         $this->load->helper('download');
