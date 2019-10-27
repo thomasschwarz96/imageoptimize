@@ -41,6 +41,15 @@ jQuery(document).ready(function ($)
     });
 
 
+    // Enable input of group if checkbox was clicked
+    $(document).on('click', '.input-group input[type=checkbox]', function()
+    {
+        var $parent = $(this).closest('.input-group');
+        var $input = $parent.find('input[type=text]');
+        $input.prop('disabled', function(i, v) { return !v; });
+    });
+
+
     // Open uploaded, optimized image in new tab.
     $(document).on('click', '#uploadedImage, #optimizedImage', function ()
     {

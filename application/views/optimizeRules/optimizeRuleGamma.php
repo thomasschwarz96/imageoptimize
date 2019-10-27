@@ -12,7 +12,7 @@
                         <input type="checkbox" id="gamma" name="gamma[]">
                     </div>
                 </div>
-                <input type="text" class="form-control" name="gamma[]" value="1.2">
+                <input type="text" class="form-control" name="gamma[]" value="1.2" disabled="disabled">
             </div>
         </div>
     </div>

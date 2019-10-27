@@ -38,7 +38,7 @@ class IO_OptimizeRuleGamma extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['gamma']) && count($options['gamma']) === 1)
+        if (!isset($options['gamma']))
         {
             return;
         }

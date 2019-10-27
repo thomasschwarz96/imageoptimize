@@ -12,7 +12,7 @@
                         <input type="checkbox" id="blur" name="blur[]">
                     </div>
                 </div>
-                <input type="text" class="form-control" name="blur[]" value="5">
+                <input type="text" class="form-control" name="blur[]" value="5" disabled="disabled">
             </div>
         </div>
     </div>

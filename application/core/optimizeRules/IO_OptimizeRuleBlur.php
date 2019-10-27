@@ -38,7 +38,7 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['blur']) &&  count($options['blur']) === 1)
+        if (!isset($options['blur']))
         {
             return;
         }
