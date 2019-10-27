@@ -102,6 +102,26 @@ class IO_Optimizer extends IO_Base
         return 90;
     }
 
+
+    /**
+     * Apply all rules on image.
+     *
+     * @param   $image    - Uploaded image which should optimized
+     *
+     * @return  void
+     */
+    private function _applyRules($image)
+    {
+        foreach ($this->_ruleSet as $ruleClass)
+        {
+            $rule = new $ruleClass();
+            $rule->setOptions($this->_form);
+            $rule->setImage($image);
+            $image = $rule->execute();
+        }
+    }
+
+
     /**
      * Class constructor.
      *
@@ -142,13 +162,7 @@ class IO_Optimizer extends IO_Base
         $image = $this->_manager->make($fileName);
 
         // Apply all rules on image.
-        foreach ($this->_ruleSet as $ruleClass)
-        {
-            $rule = new $ruleClass();
-            $rule->setOptions($this->_form);
-            $rule->setImage($image);
-            $image = $rule->execute();
-        }
+        $this->_applyRules($image);
 
         // Save optimized image with new name.
         $image = $image->save($newName, $this->_getQuality());
