@@ -125,8 +125,9 @@ class IO_Application extends IO_Base
         $optimizer = new IO_Optimizer($_SESSION['uploadedImage']);
 
         // Create optimizing rules depending on user selection.
-        $form = $this->input->post();
-        $optimizer->createRules($form);
+        $optimizer->createRules(
+            $this->input->post()
+        );
 
         // Optimize image.
         $optimizer->execute();
@@ -159,13 +160,12 @@ class IO_Application extends IO_Base
         $this->stats->newDownload();
         $this->stats->updateOverallOptimized($_SESSION['optimizedSize']);
 
-        // Create download path.
-        $imageName = $_SESSION['optimizedImageName'];
-        $fullPath = IO_UPLOAD_PATH . $imageName;
-
         // Load file helper.
         $this->load->helper('download');
 
-        force_download($fullPath, NULL);
+        force_download(
+            IO_UPLOAD_PATH . $_SESSION['optimizedImageName'],
+            NULL
+        );
     }
 }

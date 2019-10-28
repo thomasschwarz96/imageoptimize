@@ -155,17 +155,16 @@ class IO_Optimizer extends IO_Base
      */
     public function execute()
     {
-        $newName = $this->_getNewOptimizedName();
-        $fileName = $this->_uploadPath . $this->_file->file_name;
-
         // Make intervention image.
-        $image = $this->_manager->make($fileName);
+        $image = $this->_manager->make(
+            $this->_uploadPath . $this->_file->file_name
+        );
 
         // Apply all rules on image.
         $this->_applyRules($image);
 
         // Save optimized image with new name.
-        $image = $image->save($newName, $this->_getQuality());
+        $image = $image->save($this->_getNewOptimizedName(), $this->_getQuality());
 
         // Update current filesize.
         $this->_filesize = $image->filesize();
