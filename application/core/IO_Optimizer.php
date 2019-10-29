@@ -22,14 +22,6 @@ use Intervention\Image\ImageManager;
 class IO_Optimizer extends IO_Base
 {
     /**
-     * Path where images are stored.
-     *
-     * @var    string
-     */
-    private $_uploadPath;
-
-
-    /**
      * Prefix for new optimized image.
      *
      * @var    string
@@ -75,15 +67,24 @@ class IO_Optimizer extends IO_Base
 
 
     /**
-     * Create name for new optimized image.
+     * Get path of uploaded image.
+     *
+     * @return string
+     */
+    private function _getUploadedImageName()
+    {
+        return IO_UPLOAD_PATH . $this->_file->file_name;
+    }
+
+
+    /**
+     * Get path for new optimized image.
      *
      * @return string
      */
     private function _getNewOptimizedName()
     {
-        return $this->_uploadPath .
-            $this->_namePrefix .
-            $this->_file->file_name;
+        return IO_UPLOAD_PATH . $this->_namePrefix . $this->_file->file_name;
     }
 
 
@@ -133,7 +134,6 @@ class IO_Optimizer extends IO_Base
     {
         parent::__construct();
 
-        $this->_uploadPath = IO_UPLOAD_PATH;
         $this->_namePrefix = 'io_';
         $this->_ruleSet = array();
         $this->_form = array();
@@ -156,9 +156,7 @@ class IO_Optimizer extends IO_Base
     public function execute()
     {
         // Make intervention image.
-        $image = $this->_manager->make(
-            $this->_uploadPath . $this->_file->file_name
-        );
+        $image = $this->_manager->make($this->_getUploadedImageName());
 
         // Apply all rules on image.
         $this->_applyRules($image);

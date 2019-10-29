@@ -15,14 +15,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class IO_OptimizeRule
 {
     /**
-     * Options of rule.
-     *
-     * @var array
-     */
-    private $_options;
-
-
-    /**
      * Image to apply rule on.
      *
      * @var Intervention\Image\Image|boolean
@@ -37,7 +29,6 @@ class IO_OptimizeRule
      */
     public function __construct()
     {
-        $this->_options = array();
         $this->_image = FALSE;
     }
 
