@@ -24,8 +24,8 @@
 
     <!-- IO assets -->
     <link href="<?php echo base_url('assets/application/css/main.css'); ?>" rel="stylesheet" />
-    <script src="<?php echo base_url('assets/application/js/main.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/application/js/actions.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/application/js/IO_UiHandler.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/application/js/IO_ActionHandler.js'); ?>"></script>
 
     <title>Image Optimize</title>
 </head>
