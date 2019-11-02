@@ -9,10 +9,10 @@
             <div class="input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <input type="checkbox" id="gamma" name="gamma[]">
+                        <input type="checkbox" id="gamma" name="gamma[active]">
                     </div>
                 </div>
-                <input type="text" class="form-control" name="gamma[]" value="1.2" disabled="disabled">
+                <input type="text" class="form-control" name="gamma[correction]" value="1.2" disabled="disabled">
             </div>
         </div>
     </div>

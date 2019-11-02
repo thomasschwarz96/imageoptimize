@@ -9,10 +9,10 @@
             <div class="input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <input type="checkbox" id="blur" name="blur[]">
+                        <input type="checkbox" id="blur" name="blur[active]">
                     </div>
                 </div>
-                <input type="text" class="form-control" name="blur[]" value="5" disabled="disabled">
+                <input type="text" class="form-control" name="blur[amount]" value="5" disabled="disabled">
             </div>
         </div>
     </div>

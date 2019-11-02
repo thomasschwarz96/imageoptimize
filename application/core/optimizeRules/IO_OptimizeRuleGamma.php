@@ -38,15 +38,15 @@ class IO_OptimizeRuleGamma extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['gamma']))
+        if (!isset($options['gamma']) AND $options['gamma']['active'] !== 'on')
         {
             return;
         }
         $gamma = $options['gamma'];
 
-        if (isset($gamma[1]))
+        if (isset($gamma['correction']))
         {
-            $this->_correction = $gamma[1];
+            $this->_correction = $gamma['correction'];
         }
     }
     /**

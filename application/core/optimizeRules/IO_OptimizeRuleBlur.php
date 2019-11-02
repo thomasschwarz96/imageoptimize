@@ -38,15 +38,15 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['blur']))
+        if (!isset($options['blur']) AND $options['blur']['active'] !== 'on')
         {
             return;
         }
         $blur = $options['blur'];
 
-        if (isset($blur[1]))
+        if (isset($blur['amount']))
         {
-            $this->_amount = $blur[1];
+            $this->_amount = $blur['amount'];
         }
     }
 
