@@ -150,7 +150,11 @@ input {
   outline: 0;
 }
 
+.form-row > .col, .form-row > [class*="col-"] {
+  padding: 5px;
+}
 .card {
+  height: 100%;
   margin-bottom: 10px;
 }
 
