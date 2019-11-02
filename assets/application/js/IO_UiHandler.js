@@ -32,7 +32,7 @@ jQuery(document).ready(function ($)
     $(document).on('click', '.input-group input[type=checkbox]', function()
     {
         var $parent = $(this).closest('.input-group');
-        toggleDisabledProperty($parent.find('input[type=text]'));
+        toggleDisabledProperty($parent.find('.form-control'));
     });
 
 

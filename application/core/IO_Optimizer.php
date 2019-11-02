@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // Load image intervention.
 require_once FCPATH . 'vendor/autoload.php';
-
 use Intervention\Image\ImageManager;
 
 /**
@@ -61,9 +60,51 @@ class IO_Optimizer extends IO_Base
     /**
      * Filesize of current image.
      *
-     * @var Integer
+     * @var integer
      */
     private $_filesize;
+
+
+    /**
+     * Encoding format.
+     *
+     * @var string|boolean
+     */
+    private $_encodingFormat;
+
+
+    /**
+     * Set encoding format for image.
+     */
+    private function _setEncodingFormat()
+    {
+        if (isset($this->_form['encode']))
+        {
+            $this->_encodingFormat = $this->_form['encode']['format'];
+        }
+    }
+
+
+    /**
+     * Get base filename depending on encoding format.
+     *
+     * @return string
+     */
+    private function _getFilenameBasedOnEncoding()
+    {
+        $filename = $this->_file->file_name;
+
+        if ($this->_encodingFormat)
+        {
+            $filename = preg_replace(
+                '"\.(jpg|png|gif)$"',
+                '.' . $this->_encodingFormat,
+                $filename
+            );
+        }
+
+        return $filename;
+    }
 
 
     /**
@@ -84,7 +125,7 @@ class IO_Optimizer extends IO_Base
      */
     private function _getNewOptimizedName()
     {
-        return IO_UPLOAD_PATH . $this->_namePrefix . $this->_file->file_name;
+        return IO_UPLOAD_PATH . $this->_namePrefix . $this->_getFilenameBasedOnEncoding();
     }
 
 
@@ -100,7 +141,7 @@ class IO_Optimizer extends IO_Base
             return $this->_form['quality'];
         }
 
-        return 90;
+        return 80;
     }
 
 
@@ -138,6 +179,7 @@ class IO_Optimizer extends IO_Base
         $this->_ruleSet = array();
         $this->_form = array();
         $this->_filesize = 0;
+        $this->_encodingFormat = FALSE;
 
         // Clone given file object.
         $this->_file = clone $file;
@@ -182,6 +224,8 @@ class IO_Optimizer extends IO_Base
     public function createRules($form)
     {
         $this->_form = $form;
+        $this->_setEncodingFormat();
+
         $rulePrefix = "IO_OptimizeRule";
 
         foreach ($this->_form as $key => $entry)
@@ -198,7 +242,7 @@ class IO_Optimizer extends IO_Base
     /**
      * Get name of uploaded image.
      *
-     * @return  String
+     * @return  string
      */
     public function getUploadedImageName()
     {
@@ -209,18 +253,18 @@ class IO_Optimizer extends IO_Base
     /**
      * Get name of new optimized image.
      *
-     * @return  String
+     * @return  string
      */
     public function getNewImageName()
     {
-        return $this->_namePrefix . $this->_file->file_name;
+        return $this->_namePrefix . $this->_getFilenameBasedOnEncoding();
     }
 
 
     /**
      * Get filesize of current image.
      *
-     * @return  Integer
+     * @return  integer
      */
     public function getFilesize()
     {

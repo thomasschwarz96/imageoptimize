@@ -56,7 +56,7 @@ class IO_Application extends IO_Base
 
         $this->_uploadConfig = array(
             'upload_path' => IO_UPLOAD_PATH,
-            'allowed_types' => 'jpg|png',
+            'allowed_types' => 'jpg|png|gif',
             'max_size' => 6500, // 6.5 MB
             'file_ext_tolower' => TRUE,
             'overwrite' => FALSE,
