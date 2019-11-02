@@ -1,16 +1,18 @@
 jQuery(document).ready(function ($)
 {
-
     /*
     |--------------------------------------------------------------------------
     | General UI control
     |--------------------------------------------------------------------------
     */
-    // Show size options.
-    $(document).on('click', '#changeSize', function ()
+    $(document).on('click', '.option-group--opener .form-check-input', function()
     {
-        $('#changeSizeOptions').toggle();
+        let $parent = $(this).closest('.option-group--opener');
+        let $optionWrapper = $parent.next('.option-group--wrapper');
+
+        $optionWrapper.toggle();
     });
+
 
     // Fit to size click
     $(document).on('click',  '#fitToSize', function()
@@ -19,25 +21,10 @@ jQuery(document).ready(function ($)
     });
 
 
-    // Show filter options.
-    $(document).on('click', '#setFilter', function ()
-    {
-        $('#setFilterOptions').toggle();
-    });
-
-
     // Enable 'height' input field.
     $(document).on('click', '#fitToSize', function ()
     {
-        var $inputImageHeight = $('#imageHeight');
-        if (this.checked)
-        {
-            $inputImageHeight.prop('disabled', false);
-        }
-        else
-        {
-            $inputImageHeight.prop('disabled', true);
-        }
+        toggleDisabledProperty($('#imageHeight'));
     });
 
 
@@ -45,8 +32,7 @@ jQuery(document).ready(function ($)
     $(document).on('click', '.input-group input[type=checkbox]', function()
     {
         var $parent = $(this).closest('.input-group');
-        var $input = $parent.find('input[type=text]');
-        $input.prop('disabled', function(i, v) { return !v; });
+        toggleDisabledProperty($parent.find('input[type=text]'));
     });
 
 
@@ -57,4 +43,20 @@ jQuery(document).ready(function ($)
         window.open(imageLink, '_blank');
     });
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helper functions
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Toggle disabled state of given jQuery element
+     *
+     * @param   {Object}    $element        - jQuery selector
+     */
+    function toggleDisabledProperty ($element)
+    {
+        $element.prop('disabled', function(i, v) { return !v; });
+    }
 });

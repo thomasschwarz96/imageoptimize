@@ -1,11 +1,11 @@
-<div class="form-check">
+<div class="form-check option-group--opener">
     <input class="form-check-input" type="checkbox" id="changeSize" name="resize[active]"/>
     <label class="form-check-label" for="changeSize">
         Change image dimensions
     </label>
 </div>
 
-<div id="changeSizeOptions">
+<div id="changeSizeOptions" class="option-group--wrapper">
     <div class="form-row">
         <div class="col-5">
             <div class="input-group">
