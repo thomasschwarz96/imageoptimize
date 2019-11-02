@@ -20,7 +20,7 @@ class IO_Application extends IO_Base
     /**
      * Configuration for uploader.
      *
-     * @var Array
+     * @var array
      */
     private $_uploadConfig;
 

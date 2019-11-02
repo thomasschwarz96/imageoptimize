@@ -69,29 +69,29 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['resize']))
+        if (!isset($options['resize']) AND $options['resize']['active'] !== 'on')
         {
             return;
         }
         $resize = $options['resize'];
 
         // Check if width was entered.
-        if (isset($resize[1]))
+        if (isset($resize['width']))
         {
-            $this->_width = $resize[1];
+            $this->_width = $resize['width'];
         }
 
         // Check if aspect ratio was checked.
-        if (isset($resize[2]))
+        if (isset($resize['keepRatio']))
         {
             $this->_keepRatio = FALSE;
             $this->_ratioCallback = NULL;
         }
 
         // Check if height was entered.
-        if (isset($resize[3]))
+        if (isset($resize['height']))
         {
-            $this->_height = $resize[3];
+            $this->_height = $resize['height'];
         }
     }
 
