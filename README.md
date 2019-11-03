@@ -11,4 +11,4 @@ If you got some questions, check out our wiki.
 - [ ] Create API for external use
 
 ## License
-Coming soon!
+Please see the [license agreement](https://github.com/thomasschwarz96/imageoptimize/blob/master/LICENSE).
