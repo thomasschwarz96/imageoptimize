@@ -4,7 +4,7 @@
 
   <?php if (isset($image)) : ?>
     data-image="<?php echo base_url('uploads/') . $image; ?>"
-    style="background-image: url(<?php echo base_url('uploads/') . $image; ?>);"
+    style="background-image: url('<?php echo base_url('uploads/') . $image; ?>');"
   <?php endif; ?>
 
   ></div>
@@ -12,7 +12,7 @@
 
   <?php if (isset($preview)) : ?>
     data-image="<?php echo base_url('uploads/') . $preview; ?>"
-    style="background-image: url(<?php echo base_url('uploads/') . $preview . '?ver=' . time(); ?>);"
+    style="background-image: url('<?php echo base_url('uploads/') . $preview . '?ver=' . time(); ?>');"
   <?php endif; ?>
 
   ></div>
