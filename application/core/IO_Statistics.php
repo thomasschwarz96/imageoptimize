@@ -132,9 +132,13 @@ class IO_Statistics extends IO_Base
      */
     public function updateOverallOptimized($newOptimizedSize)
     {
-        // Increase size of 'overallOptimized'.
-        $this->_size += intval($newOptimizedSize);
+        $size = intval($newOptimizedSize);
+        if ($size < 0)
+        {
+            $size *= -1;
+        }
 
+        $this->_size += $size;
         return $this->_updateFile();
     }
 
