@@ -5,6 +5,9 @@ Check it out here: www.image-optimize.com
 
 If you got some questions, check out our wiki.
 
+## Going Live
+Coming soon!
+
 ## To do
 - [x] Add rule to change image encoding
 - [x] Imporve UI handling
