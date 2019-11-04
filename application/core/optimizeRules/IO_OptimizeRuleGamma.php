@@ -30,6 +30,7 @@ class IO_OptimizeRuleGamma extends IO_OptimizeRule
         parent::__construct();
 
         $this->_correction = FALSE;
+        $this->_optionName = 'gamma';
     }
 
 
@@ -38,12 +39,12 @@ class IO_OptimizeRuleGamma extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['gamma']) AND $options['gamma']['active'] !== 'on')
+        if (!$this->_optionsAvailable($options))
         {
             return;
         }
-        $gamma = $options['gamma'];
 
+        $gamma = $options[$this->_optionName];
         if (isset($gamma['correction']))
         {
             $this->_correction = $gamma['correction'];

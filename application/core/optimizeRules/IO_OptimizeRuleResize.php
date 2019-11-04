@@ -61,6 +61,8 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
         {
             $constraint->aspectRatio();
         };
+
+        $this->_optionName = 'resize';
     }
 
 
@@ -69,12 +71,12 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['resize']) AND $options['resize']['active'] !== 'on')
+        if (!$this->_optionsAvailable($options))
         {
             return;
         }
-        $resize = $options['resize'];
 
+        $resize = $options[$this->_optionName];
         // Check if width was entered.
         if (isset($resize['width']))
         {

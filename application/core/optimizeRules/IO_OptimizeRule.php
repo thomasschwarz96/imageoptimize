@@ -23,6 +23,31 @@ class IO_OptimizeRule
 
 
     /**
+     * Form option name.
+     *
+     * @var string|boolean
+     */
+    protected $_optionName;
+
+
+    /**
+     * Determine if necessary options are available
+     *
+     * @param   {array}     $options        - Form data
+     * @return  boolean
+     */
+    protected function _optionsAvailable($options)
+    {
+        if (!isset($options[$this->_optionName]))
+        {
+            return false;
+        }
+
+        $ruleOptions = $options[$this->_optionName];
+        return isset($ruleOptions['active']) && $ruleOptions['active'] === 'on';
+    }
+
+    /**
      * Class constructor.
      *
      * @return void
@@ -30,13 +55,15 @@ class IO_OptimizeRule
     public function __construct()
     {
         $this->_image = FALSE;
+        $this->_optionName = FALSE;
     }
 
 
     /**
      * Set image where rule should be applied.
      *
-     * @return void
+     * @param   {Intervention\Image\Image}     $image   - Uploaded image
+     * @return  void
      */
     public function setImage($image)
     {
@@ -47,7 +74,8 @@ class IO_OptimizeRule
     /**
      * Set options for correct execute.
      *
-     * @return void
+     * @param   {array}     $options        - Form data
+     * @return  void
      */
     public function setOptions($options)
     {

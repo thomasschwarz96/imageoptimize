@@ -30,6 +30,7 @@ class IO_OptimizeRuleEncode extends IO_OptimizeRule
         parent::__construct();
 
         $this->_format = FALSE;
+        $this->_optionName = 'encode';
     }
 
 
@@ -38,12 +39,12 @@ class IO_OptimizeRuleEncode extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['encode']) AND $options['encode']['active'] !== 'on')
+        if (!$this->_optionsAvailable($options))
         {
             return;
         }
-        $encode = $options['encode'];
 
+        $encode = $options[$this->_optionName];
         if (isset($encode['format']))
         {
             $this->_format = $encode['format'];

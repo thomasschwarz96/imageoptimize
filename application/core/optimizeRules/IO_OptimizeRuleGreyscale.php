@@ -17,6 +17,17 @@ class IO_OptimizeRuleGreyscale extends IO_OptimizeRule
     /**
      * @inheritDoc
      */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->_optionName = 'greyscale';
+    }
+
+
+    /**
+     * @inheritDoc
+     */
     public function execute()
     {
         return $this->_image->greyscale();

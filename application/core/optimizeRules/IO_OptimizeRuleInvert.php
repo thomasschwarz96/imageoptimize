@@ -17,6 +17,17 @@ class IO_OptimizeRuleInvert extends IO_OptimizeRule
     /**
      * @inheritDoc
      */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->_optionName = 'invert';
+    }
+
+
+    /**
+     * @inheritDoc
+     */
     public function execute()
     {
         return $this->_image->invert();

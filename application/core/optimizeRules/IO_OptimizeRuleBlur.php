@@ -30,6 +30,7 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
         parent::__construct();
 
         $this->_amount = FALSE;
+        $this->_optionName = 'blur';
     }
 
 
@@ -38,12 +39,12 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
      */
     public function setOptions($options)
     {
-        if (!isset($options['blur']) AND $options['blur']['active'] !== 'on')
+        if (!$this->_optionsAvailable($options))
         {
             return;
         }
-        $blur = $options['blur'];
 
+        $blur = $options[$this->_optionName];
         if (isset($blur['amount']))
         {
             $this->_amount = $blur['amount'];
