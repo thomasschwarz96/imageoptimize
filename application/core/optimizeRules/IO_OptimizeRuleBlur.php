@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Blur optimize rule for IO_Optimizer.
  *
- * @package    ImageOptimize
- * @author    Thomas Schwarz
- * @copyright    Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
- * @license    -
- * @link    https://www.image-optimize.com/
- * @since    Version 0.1.0
+ * @package     ImageOptimize
+ * @author      Thomas Schwarz
+ * @copyright   Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
+ * @license     -
+ * @link        https://www.image-optimize.com/
+ * @since       Version 0.1.0
  * @filesource
  */
 class IO_OptimizeRuleBlur extends IO_OptimizeRule
@@ -25,30 +25,25 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
     /**
      * @inheritDoc
      */
-    public function __construct()
+    protected function _setRuleOptions()
     {
-        parent::__construct();
-
-        $this->_amount = FALSE;
-        $this->_optionName = 'blur';
+        $options = $this->_options;
+        if (isset($options['amount']))
+        {
+            $this->_amount = $options['amount'];
+        }
     }
 
 
     /**
      * @inheritDoc
      */
-    public function setOptions($options)
+    public function __construct()
     {
-        if (!$this->_optionsAvailable($options))
-        {
-            return;
-        }
+        parent::__construct();
 
-        $blur = $options[$this->_optionName];
-        if (isset($blur['amount']))
-        {
-            $this->_amount = $blur['amount'];
-        }
+        $this->_amount = FALSE;
+        $this->_optionName = 'blur';
     }
 
 

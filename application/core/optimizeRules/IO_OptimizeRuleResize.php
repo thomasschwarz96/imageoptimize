@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Resize optimize rule for IO_Optimizer.
  *
- * @package    ImageOptimize
- * @author    Thomas Schwarz
- * @copyright    Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
- * @license    -
- * @link    https://www.image-optimize.com/
- * @since    Version 0.1.0
+ * @package     ImageOptimize
+ * @author      Thomas Schwarz
+ * @copyright   Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
+ * @license     -
+ * @link        https://www.image-optimize.com/
+ * @since       Version 0.1.0
  * @filesource
  */
 class IO_OptimizeRuleResize extends IO_OptimizeRule
@@ -69,31 +69,26 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
     /**
      * @inheritDoc
      */
-    public function setOptions($options)
+    protected function _setRuleOptions()
     {
-        if (!$this->_optionsAvailable($options))
-        {
-            return;
-        }
-
-        $resize = $options[$this->_optionName];
+        $options = $this->_options;
         // Check if width was entered.
-        if (isset($resize['width']))
+        if (isset($options['width']))
         {
-            $this->_width = $resize['width'];
+            $this->_width = $options['width'];
         }
 
         // Check if aspect ratio was checked.
-        if (isset($resize['keepRatio']))
+        if (isset($options['keepRatio']))
         {
             $this->_keepRatio = FALSE;
             $this->_ratioCallback = NULL;
         }
 
         // Check if height was entered.
-        if (isset($resize['height']))
+        if (isset($options['height']))
         {
-            $this->_height = $resize['height'];
+            $this->_height = $options['height'];
         }
     }
 

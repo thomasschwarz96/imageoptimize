@@ -2,17 +2,18 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Base optimize rule for IO_Optimizer.
+ * Abstracted base optimize rule for IO_Optimizer.
  *
- * @package    ImageOptimize
- * @author    Thomas Schwarz
- * @copyright    Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
- * @license    -
- * @link    https://www.image-optimize.com/
- * @since    Version 0.1.0
+ * @package     ImageOptimize
+ * @author      Thomas Schwarz
+ * @copyright   Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
+ * @license     -
+ * @link        https://www.image-optimize.com/
+ * @since       Version 0.1.0
  * @filesource
+ * @abstract
  */
-class IO_OptimizeRule
+abstract class IO_OptimizeRule
 {
     /**
      * Image to apply rule on.
@@ -20,6 +21,14 @@ class IO_OptimizeRule
      * @var Intervention\Image\Image|boolean
      */
     protected $_image;
+
+
+    /**
+     * Options for rule.
+     *
+     * @var array
+     */
+    protected $_options;
 
 
     /**
@@ -31,7 +40,7 @@ class IO_OptimizeRule
 
 
     /**
-     * Determine if necessary options are available
+     * Determine if necessary options are available and active
      *
      * @param   {array}     $options        - Form data
      * @return  boolean
@@ -47,6 +56,15 @@ class IO_OptimizeRule
         return isset($ruleOptions['active']) && $ruleOptions['active'] === 'on';
     }
 
+
+    /**
+     * Set rule specific options.
+     *
+     * @return void
+     * @abstract
+     */
+    abstract protected function _setRuleOptions();
+
     /**
      * Class constructor.
      *
@@ -55,6 +73,7 @@ class IO_OptimizeRule
     public function __construct()
     {
         $this->_image = FALSE;
+        $this->_options = array();
         $this->_optionName = FALSE;
     }
 
@@ -79,16 +98,25 @@ class IO_OptimizeRule
      */
     public function setOptions($options)
     {
+        if (!isset($options))
+        {
+            return;
+        }
+
+        if ($this->_optionsAvailable($options))
+        {
+            $this->_options = $options[$this->_optionName];
+        }
+
+        $this->_setRuleOptions();
     }
 
 
     /**
      * Apply rule to current image.
      *
-     * @return Intervention\Image\Image|boolean
+     * @return Intervention\Image\Image
+     * @abstract
      */
-    public function execute()
-    {
-        return false;
-    }
+    abstract public function execute();
 }
