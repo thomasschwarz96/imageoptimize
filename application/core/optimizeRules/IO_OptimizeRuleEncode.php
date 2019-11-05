@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @package     ImageOptimize
  * @author      Thomas Schwarz
  * @copyright   Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
- * @license     -
+ * @license     MIT License (https://opensource.org/licenses/MIT)
  * @link        https://www.image-optimize.com/
  * @since       Version 0.1.0
  * @filesource

@@ -6,12 +6,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * Base class for whole application.
  *
- * @package    ImageOptimize
- * @author    Thomas Schwarz
- * @copyright    Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
- * @license    -
- * @link    https://www.image-optimize.com/
- * @since    Version 0.1.0
+ * @package     ImageOptimize
+ * @author      Thomas Schwarz
+ * @copyright   Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
+ * @license     MIT License (https://opensource.org/licenses/MIT)
+ * @link        https://www.image-optimize.com/
+ * @since       Version 0.1.0
  * @filesource
  */
 class IO_Base extends CI_Controller

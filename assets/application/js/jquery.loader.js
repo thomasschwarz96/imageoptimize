@@ -3,10 +3,12 @@
  *
  * jQuery loader class.
  *
- * @package    ImageOptimize
- * @author    Thomas Schwarz
- * @copyright    Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
- * @since    Version 0.1.0
+ * @package     ImageOptimize
+ * @author      Thomas Schwarz
+ * @copyright   Copyright (c) 2019, Thomas Schwarz. (https://www.image-optimize.com/)
+ * @license     MIT License (https://opensource.org/licenses/MIT)
+ * @link        https://www.image-optimize.com/
+ * @since       Version 0.1.0
  * @filesource
  */
 (function ($)
