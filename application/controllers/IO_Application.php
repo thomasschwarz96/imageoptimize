@@ -91,7 +91,7 @@ class IO_Application extends IO_Base
         if (!$this->upload->do_upload('image'))
         {
             $alertData = array(
-                'alertText' => "The Upload gone wrong!",
+                'alertText' => implode(", ", $this->upload->error_msg),
                 'alertStyle' => 'danger'
             );
             $viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
