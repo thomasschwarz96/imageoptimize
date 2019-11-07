@@ -180,8 +180,6 @@ class IO_Optimizer extends IO_Base
         $this->_form = array();
         $this->_filesize = 0;
         $this->_encodingFormat = FALSE;
-
-        // Clone given file object.
         $this->_file = clone $file;
 
         $this->_manager = new ImageManager(array(
@@ -197,19 +195,12 @@ class IO_Optimizer extends IO_Base
      */
     public function execute()
     {
-        // Make intervention image.
         $image = $this->_manager->make($this->_getUploadedImageName());
-
-        // Apply all rules on image.
         $this->_applyRules($image);
 
-        // Save optimized image with new name.
         $image = $image->save($this->_getNewOptimizedName(), $this->_getQuality());
-
-        // Update current filesize.
         $this->_filesize = $image->filesize();
 
-        // Frees associated memory.
         $image->destroy();
     }
 

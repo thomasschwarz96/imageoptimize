@@ -72,20 +72,17 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
     protected function _setRuleOptions()
     {
         $options = $this->_options;
-        // Check if width was entered.
         if (isset($options['width']))
         {
             $this->_width = $options['width'];
         }
 
-        // Check if aspect ratio was checked.
         if (isset($options['keepRatio']))
         {
             $this->_keepRatio = FALSE;
             $this->_ratioCallback = NULL;
         }
 
-        // Check if height was entered.
         if (isset($options['height']))
         {
             $this->_height = $options['height'];

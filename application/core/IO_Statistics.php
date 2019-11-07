@@ -62,11 +62,9 @@ class IO_Statistics extends IO_Base
      */
     private function _updateFile()
     {
-        // Update JSON.
         $this->_json['optimizedImages'] = $this->optimizedImages;
         $this->_json['optimizedSize'] = $this->_size;
 
-        // Write JSON to file.
         $success = file_put_contents(
             $this->_statFile,
             json_encode($this->_json)
@@ -96,15 +94,11 @@ class IO_Statistics extends IO_Base
     {
         parent::__construct();
 
-        // Get file.
         $this->_statFile = FCPATH . 'assets/statistics.json';
-
-        // Get json.
         $this->_json = json_decode(
             file_get_contents($this->_statFile), true
         );
 
-        // Init values.
         $this->_size = intval($this->_json['optimizedSize']);
         $this->optimizedImages = intval($this->_json['optimizedImages']);
         $this->optimizedSize = $this->_convertOptimizedSize();
@@ -117,9 +111,7 @@ class IO_Statistics extends IO_Base
      */
     public function newDownload()
     {
-        // Increase downloaded.
         $this->optimizedImages += 1;
-
         return $this->_updateFile();
     }
 

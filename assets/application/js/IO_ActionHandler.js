@@ -21,15 +21,11 @@ jQuery(document).ready(function ($)
     {
         event.preventDefault();
 
-        // Create new formData object.
-        var formData = new FormData(),
+        let formData = new FormData(),
             image = $('input#image')[0].files[0];
-
-        // Append _token and image to formData.
         formData.append('image', image);
 
-
-        var ajax = new IO_Ajax();
+        let ajax = new IO_Ajax();
         ajax.path = 'upload';
         ajax.setData(formData);
         ajax.complete(closeAlert);
@@ -42,9 +38,8 @@ jQuery(document).ready(function ($)
     {
         event.preventDefault();
 
-        // Create new formData object.
-        var formData = new FormData($('form[name=optimize]')[0]);
-        var ajax = new IO_Ajax();
+        let formData = new FormData($('form[name=optimize]')[0]);
+        let ajax = new IO_Ajax();
         ajax.path = 'optimize';
         ajax.setData(formData);
         ajax.complete(closeAlert);

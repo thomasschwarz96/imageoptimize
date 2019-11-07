@@ -53,12 +53,9 @@ class IO_Ajax
      */
     _render(templates)
     {
-        // Render ajaxTarget's in DOM.
         for (let key in templates)
         {
             let $domTarget = $('.ajaxTarget-' + key);
-
-            // Check if ajaxTarget exists.
             if ($domTarget.length)
             {
                 $domTarget.html(templates[key]);
@@ -76,7 +73,6 @@ class IO_Ajax
      */
     _success(data)
     {
-        // Parse data.
         let objectData = JSON.parse(data);
         if (!objectData)
         {
@@ -84,8 +80,6 @@ class IO_Ajax
         }
 
         this._render(objectData);
-
-        // Hide loader.
         $.hideIoLoader();
     }
 
@@ -124,17 +118,13 @@ class IO_Ajax
      */
     send()
     {
-        // Check if path is given.
         if (this.path === '')
         {
             return;
         }
-
-        // Show loader.
         $.showIoLoader();
 
         let wrapThis = this;
-        // Make request.
         $.ajax({
             url: this.path,
             data: this.data,

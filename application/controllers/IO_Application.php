@@ -71,11 +71,9 @@ class IO_Application extends IO_Base
      */
     public function index()
     {
-        // Generate view data.
         $viewData = $this->_getStatisticsViewData();
         $viewData['contentView'] = 'components/upload';
 
-        // Load main application.
         $this->load->view('application', $viewData);
     }
 
@@ -85,17 +83,13 @@ class IO_Application extends IO_Base
      */
     public function upload()
     {
-        // Generate view data.
         $viewData = $this->_getStatisticsViewData();
         $viewData['contentView'] = 'components/optimize';
 
-        // Init uploader.
         $this->upload->initialize($this->_uploadConfig);
 
-        // Make upload.
         if (!$this->upload->do_upload('image'))
         {
-            // Create alert message.
             $alertData = array(
                 'alertText' => "The Upload gone wrong!",
                 'alertStyle' => 'danger'
@@ -121,26 +115,18 @@ class IO_Application extends IO_Base
      */
     public function optimize()
     {
-        // Create new optimizer.
         $optimizer = new IO_Optimizer($_SESSION['uploadedImage']);
-
-        // Create optimizing rules depending on user selection.
         $optimizer->createRules(
             $this->input->post()
         );
-
-        // Optimize image.
         $optimizer->execute();
 
-        // Update session data.
         $_SESSION['optimizedSize'] = $_SESSION['filesize'] - $optimizer->getFilesize();
         $_SESSION['optimizedImageName'] = $optimizer->getNewImageName();
 
-        // Get alert mesasge.
         $alertData = array('alertText' => "Preview succesfully generated!");
         $viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
 
-        // Get images.
         $imagesData = array(
             'image' => $optimizer->getUploadedImageName(),
             'preview' => $optimizer->getNewImageName()
@@ -156,11 +142,9 @@ class IO_Application extends IO_Base
      */
     public function download()
     {
-        // Update statistics.
         $this->stats->newDownload();
         $this->stats->updateOverallOptimized($_SESSION['optimizedSize']);
 
-        // Load file helper.
         $this->load->helper('download');
 
         force_download(
