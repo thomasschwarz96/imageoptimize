@@ -101,16 +101,16 @@ class IO_Application extends IO_Base
                 'alertStyle' => 'danger'
             );
             $viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
+            $viewData['content'] = $this->load->view('components/upload', $viewData, true);
         }
         else
         {
             $viewData['image'] = $this->upload->file_name;
+            $viewData['content'] = $this->load->view('components/optimize', $viewData, true);
+
             $_SESSION['uploadedImage'] = $this->upload;
             $_SESSION['filesize'] = $this->upload->file_size * 1024; // Convert to bytes
         }
-
-        // Load main application.
-        $viewData['content'] = $this->load->view('components/optimize', $viewData, true);
 
         echo json_encode($viewData);
     }
