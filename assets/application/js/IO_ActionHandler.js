@@ -60,6 +60,6 @@ jQuery(document).ready(function ($)
         setTimeout(function ()
         {
             $('.alert button.close').click();
-        }, 3000);
+        }, 6000);
     }
 });

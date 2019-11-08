@@ -46,6 +46,21 @@ class IO_Application extends IO_Base
 
 
     /**
+     * Set validation rules depending on needed optimized rules.
+     */
+    private function _setValidationRules()
+    {
+        $postData = $this->input->post();
+        $classNames = IO_Helper::getOptimizeRuleClasses($postData);
+
+        foreach ($classNames as $className)
+        {
+            $className::setValidationRules($this->validator);
+        }
+    }
+
+
+    /**
      * Class constructor.
      *
      * @return void
@@ -91,7 +106,7 @@ class IO_Application extends IO_Base
         if (!$this->upload->do_upload('image'))
         {
             $alertData = array(
-                'alertText' => implode(", ", $this->upload->error_msg),
+                'alertText' => implode("<br />", $this->upload->error_msg),
                 'alertStyle' => 'danger'
             );
             $viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
@@ -114,24 +129,36 @@ class IO_Application extends IO_Base
      */
     public function optimize()
     {
-        $optimizer = new IO_Optimizer($_SESSION['uploadedImage']);
-        $optimizer->createRules(
-            $this->input->post()
-        );
-        $optimizer->execute();
+        $this->_setValidationRules();
+        if ($this->validator->run() === FALSE)
+        {
+            $alertData = array(
+                'alertText' => implode("<br />", $this->validator->error_array()),
+                'alertStyle' => 'danger'
+            );
+            $viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
+        }
+        else
+        {
+            $optimizer = new IO_Optimizer($_SESSION['uploadedImage']);
+            $optimizer->createRules(
+                $this->input->post()
+            );
+            $optimizer->execute();
 
-        $_SESSION['fileSizeUploaded'] = $optimizer->fileSizeUploaded;
-        $_SESSION['fileSizeOptimized'] = $optimizer->fileSizeOptimized;
-        $_SESSION['optimizedImageName'] = $optimizer->getNewImageName();
+            $_SESSION['fileSizeUploaded'] = $optimizer->fileSizeUploaded;
+            $_SESSION['fileSizeOptimized'] = $optimizer->fileSizeOptimized;
+            $_SESSION['optimizedImageName'] = $optimizer->getNewImageName();
 
-        $alertData = array('alertText' => "Preview succesfully generated!");
-        $viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
+            $alertData = array('alertText' => "Preview succesfully generated!");
+            $viewData['alert'] = $this->load->view('components/alert', $alertData, TRUE);
 
-        $imagesData = array(
-            'image' => $optimizer->getUploadedImageName(),
-            'preview' => $optimizer->getNewImageName()
-        );
-        $viewData['images'] = $this->load->view('components/preview-image', $imagesData, TRUE);
+            $imagesData = array(
+                'image' => $optimizer->getUploadedImageName(),
+                'preview' => $optimizer->getNewImageName()
+            );
+            $viewData['images'] = $this->load->view('components/preview-image', $imagesData, TRUE);
+        }
 
         echo json_encode($viewData);
     }

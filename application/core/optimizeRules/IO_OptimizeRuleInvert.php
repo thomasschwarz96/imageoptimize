@@ -41,4 +41,15 @@ class IO_OptimizeRuleInvert extends IO_OptimizeRule
     {
         return $this->_image->invert();
     }
+
+
+    /**
+     * Set specific validation rules.
+     *
+     * @param   {CI_Form_validation}    $validator      - Client side validator
+     */
+    public static function setValidationRules($validator)
+    {
+        $validator->set_rules('invert', 'Invert', 'greater_than[0]|trim|strip_tags');
+    }
 }

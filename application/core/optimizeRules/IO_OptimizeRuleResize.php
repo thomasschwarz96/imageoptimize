@@ -106,4 +106,18 @@ class IO_OptimizeRuleResize extends IO_OptimizeRule
             $this->_ratioCallback
         );
     }
+
+
+    /**
+     * Set specific validation rules.
+     *
+     * @param   {CI_Form_validation}    $validator      - Client side validator
+     */
+    public static function setValidationRules($validator)
+    {
+        $validator->set_rules('resize[active]', 'Change image dimensions', 'in_list[on]|trim|strip_tags');
+        $validator->set_rules('resize[width]', 'Width', 'numeric|trim|strip_tags');
+        $validator->set_rules('resize[keepRatio]', 'Width', 'in_list[on]|trim|strip_tags');
+        $validator->set_rules('resize[height]', 'Width', 'numeric|trim|strip_tags');
+    }
 }

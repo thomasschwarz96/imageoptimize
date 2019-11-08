@@ -59,4 +59,16 @@ class IO_OptimizeRuleEncode extends IO_OptimizeRule
 
         return $this->_image->encode($this->_format);
     }
+
+
+    /**
+     * Set specific validation rules.
+     *
+     * @param   {CI_Form_validation}    $validator      - Client side validator
+     */
+    public static function setValidationRules($validator)
+    {
+        $validator->set_rules('encode[active]', 'Use enocde', 'in_list[on]|trim|strip_tags');
+        $validator->set_rules('encode[format]', 'Encode format', 'alpha|trim|strip_tags');
+    }
 }

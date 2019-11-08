@@ -58,4 +58,16 @@ class IO_OptimizeRuleGamma extends IO_OptimizeRule
         }
         return $this->_image->gamma($this->_correction);
     }
+
+
+    /**
+     * Set specific validation rules.
+     *
+     * @param   {CI_Form_validation}    $validator      - Client side validator
+     */
+    public static function setValidationRules($validator)
+    {
+        $validator->set_rules('gamma[active]', 'Use gamma', 'in_list[on]|trim|strip_tags');
+        $validator->set_rules('gamma[correction]', 'Gamma correction', 'numeric|trim|strip_tags');
+    }
 }

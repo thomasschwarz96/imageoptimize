@@ -236,16 +236,7 @@ class IO_Optimizer extends IO_Base
         $this->_form = $form;
         $this->_setEncodingFormat();
 
-        $rulePrefix = "IO_OptimizeRule";
-
-        foreach ($this->_form as $key => $entry)
-        {
-            $className = $rulePrefix . ucfirst($key);
-            if (class_exists($className))
-            {
-                array_push($this->_ruleSet, $className);
-            }
-        }
+        $this->_ruleSet = IO_Helper::getOptimizeRuleClasses($form);
     }
 
 

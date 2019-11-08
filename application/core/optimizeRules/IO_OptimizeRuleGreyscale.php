@@ -41,4 +41,15 @@ class IO_OptimizeRuleGreyscale extends IO_OptimizeRule
     {
         return $this->_image->greyscale();
     }
+
+
+    /**
+     * Set specific validation rules.
+     *
+     * @param   {CI_Form_validation}    $validator      - Client side validator
+     */
+    public static function setValidationRules($validator)
+    {
+        $validator->set_rules('greyscale', 'Greyscale', 'greater_than[0]|trim|strip_tags');
+    }
 }

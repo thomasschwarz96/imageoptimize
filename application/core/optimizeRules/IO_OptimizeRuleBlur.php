@@ -58,4 +58,16 @@ class IO_OptimizeRuleBlur extends IO_OptimizeRule
         }
         return $this->_image->blur($this->_amount);
     }
+
+
+    /**
+     * Set specific validation rules.
+     *
+     * @param   {CI_Form_validation}    $validator      - Client side validator
+     */
+    public static function setValidationRules($validator)
+    {
+        $validator->set_rules('blur[active]', 'Use blur', 'in_list[on]|trim|strip_tags');
+        $validator->set_rules('blur[amount]', 'Blur amount', 'numeric|trim|strip_tags');
+    }
 }
