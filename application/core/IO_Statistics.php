@@ -82,7 +82,7 @@ class IO_Statistics extends IO_Base
     {
         $gbSize = $this->_size / 1024 / 1024 / 1024;
 
-        return round($gbSize, 3);
+        return round($gbSize, 2);
     }
 
     /**
@@ -116,21 +116,16 @@ class IO_Statistics extends IO_Base
     }
 
     /**
-     * Increase size of optimizedSize.
+     * Increase optimizedSize.
      *
      * @param Integer/Float $newOptimizedSize
      *
      * @return Boolean
      */
-    public function updateOverallOptimized($newOptimizedSize)
+    public function updateSize($newOptimizedSize)
     {
         $size = intval($newOptimizedSize);
-        if ($size < 0)
-        {
-            $size *= -1;
-        }
-
-        $this->_size += $size;
+        $this->_size += abs($size);
         return $this->_updateFile();
     }
 

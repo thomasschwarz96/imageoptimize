@@ -35,6 +35,15 @@ class IO_Optimizer extends IO_Base
      */
     private $_file;
 
+
+    /**
+     * Intervention image instance of uploaded image.
+     *
+     * @var    Intervention\Image\Image
+     */
+    private $_image;
+
+
     /**
      * ImageManager class to make all changes on images.
      *
@@ -58,19 +67,27 @@ class IO_Optimizer extends IO_Base
 
 
     /**
-     * Filesize of current image.
-     *
-     * @var integer
-     */
-    private $_filesize;
-
-
-    /**
      * Encoding format.
      *
      * @var string|boolean
      */
     private $_encodingFormat;
+
+
+    /**
+     * File size of uploaded image.
+     *
+     * @var integer
+     */
+    public $fileSizeUploaded;
+
+
+    /**
+     * File size of optimized image.
+     *
+     * @var integer
+     */
+    public $fileSizeOptimized;
 
 
     /**
@@ -148,18 +165,16 @@ class IO_Optimizer extends IO_Base
     /**
      * Apply all rules on image.
      *
-     * @param   $image    - Uploaded image which should optimized
-     *
      * @return  void
      */
-    private function _applyRules($image)
+    private function _applyRules()
     {
         foreach ($this->_ruleSet as $ruleClass)
         {
             $rule = new $ruleClass();
             $rule->setOptions($this->_form);
-            $rule->setImage($image);
-            $image = $rule->execute();
+            $rule->setImage($this->_image);
+            $this->_image = $rule->execute();
         }
     }
 
@@ -178,13 +193,16 @@ class IO_Optimizer extends IO_Base
         $this->_namePrefix = 'io_';
         $this->_ruleSet = array();
         $this->_form = array();
-        $this->_filesize = 0;
         $this->_encodingFormat = FALSE;
         $this->_file = clone $file;
 
         $this->_manager = new ImageManager(array(
             'driver' => 'imagick'
         ));
+        $this->_image = $this->_manager->make($this->_getUploadedImageName());
+
+        $this->fileSizeUploaded = $this->_image->filesize();
+        $this->fileSizeOptimized = 0;
     }
 
 
@@ -195,13 +213,14 @@ class IO_Optimizer extends IO_Base
      */
     public function execute()
     {
-        $image = $this->_manager->make($this->_getUploadedImageName());
-        $this->_applyRules($image);
+        $this->_applyRules();
 
-        $image = $image->save($this->_getNewOptimizedName(), $this->_getQuality());
-        $this->_filesize = $image->filesize();
+        $this->_image = $this->_image->save(
+            $this->_getNewOptimizedName(),
+            $this->_getQuality()
+        );
 
-        $image->destroy();
+        $this->fileSizeOptimized = $this->_image->filesize();
     }
 
 
@@ -250,16 +269,4 @@ class IO_Optimizer extends IO_Base
     {
         return $this->_namePrefix . $this->_getFilenameBasedOnEncoding();
     }
-
-
-    /**
-     * Get filesize of current image.
-     *
-     * @return  integer
-     */
-    public function getFilesize()
-    {
-        return $this->_filesize;
-    }
-
 }

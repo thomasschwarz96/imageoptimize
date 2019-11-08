@@ -103,7 +103,6 @@ class IO_Application extends IO_Base
             $viewData['content'] = $this->load->view('components/optimize', $viewData, true);
 
             $_SESSION['uploadedImage'] = $this->upload;
-            $_SESSION['filesize'] = $this->upload->file_size * 1024; // Convert to bytes
         }
 
         echo json_encode($viewData);
@@ -121,7 +120,8 @@ class IO_Application extends IO_Base
         );
         $optimizer->execute();
 
-        $_SESSION['optimizedSize'] = $_SESSION['filesize'] - $optimizer->getFilesize();
+        $_SESSION['fileSizeUploaded'] = $optimizer->fileSizeUploaded;
+        $_SESSION['fileSizeOptimized'] = $optimizer->fileSizeOptimized;
         $_SESSION['optimizedImageName'] = $optimizer->getNewImageName();
 
         $alertData = array('alertText' => "Preview succesfully generated!");
@@ -142,8 +142,9 @@ class IO_Application extends IO_Base
      */
     public function download()
     {
+        $size = $_SESSION['fileSizeUploaded'] - $_SESSION['fileSizeOptimized'];
         $this->stats->newDownload();
-        $this->stats->updateOverallOptimized($_SESSION['optimizedSize']);
+        $this->stats->updateSize($size);
 
         $this->load->helper('download');
 
