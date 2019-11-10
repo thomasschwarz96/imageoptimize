@@ -98,3 +98,7 @@ define('OPTIMIZE_RULES_PATH', VIEWS_PATH . 'optimizeRules/');
 define('IO_UPLOAD_PATH', FCPATH . 'uploads/');
 define('IO_CORE_PATH', APPPATH . 'core/');
 define('IO_OPTIMIZE_RULES_PATH', IO_CORE_PATH . 'optimizeRules/');
+
+define('IO_SEO_TITLE', 'Image Optimize - Compress and resize images for free');
+define('IO_SEO_DESCRIPTION', 'image-optimize.com is a WebApp where you can optimize, resize and put some filters to your image.');
+define('IO_SEO_KEYWORDS', 'image, images, optimize, compress, resize, filter, save, image optimize, free, download, free download, open source, open-source, web');

@@ -3,6 +3,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- SEO -->
+    <meta name="description" content="<?php echo IO_SEO_DESCRIPTION; ?>" />
+    <meta name="keywords" content="<?php echo IO_SEO_KEYWORDS; ?>" />
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+
+    <!-- SEO Twitter -->
+    <meta name="twitter:title" content="<?php echo IO_SEO_TITLE; ?>" />
+    <meta name="twitter:description" content="<?php echo IO_SEO_DESCRIPTION; ?>" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- SEO Facebook -->
+    <meta property="og:title" content="<?php echo IO_SEO_TITLE; ?>" />
+    <meta property="og:description" content="<?php echo IO_SEO_DESCRIPTION; ?>" />
+    <meta property="og:site_name" content="Image Optimize" />
+    <meta property="og:url" content="https://www.image-optimize.com/" />
+
     <!-- jQuery -->
     <script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -27,5 +43,5 @@
     <script src="<?php echo base_url('assets/application/js/IO_UiHandler.js'); ?>"></script>
     <script src="<?php echo base_url('assets/application/js/IO_ActionHandler.js'); ?>"></script>
 
-    <title>Image Optimize</title>
+    <title><?php echo IO_SEO_TITLE; ?></title>
 </head>
