@@ -11,7 +11,6 @@ Coming soon!
 ## To do
 - [x] Add rule to change image encoding
 - [x] Imporve UI handling
-- [ ] Add unit tests
 - [ ] Create API for external use
 
 ## License
