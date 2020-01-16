@@ -16,6 +16,10 @@ Coming soon!
 ## License
 Please see the [license agreement](https://github.com/thomasschwarz96/imageoptimize/blob/master/LICENSE).
 
+## Other
+If you got some problems, improvements or changes let me know.  
+I appreciate every single help!
+
 <pre>
   _____ _                      ___     _                       ___  __ 
  |_   _| |_  ___ _ __  __ _ __/ __| __| |___ __ ____ _ _ _ ___/ _ \/ / 
