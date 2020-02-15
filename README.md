@@ -11,7 +11,6 @@ Coming soon!
 ## To do
 - [x] Add rule to change image encoding
 - [x] Imporve UI handling
-- [ ] Create API for external use
 
 ## License
 Please see the [license agreement](https://github.com/thomasschwarz96/imageoptimize/blob/master/LICENSE).
